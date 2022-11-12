@@ -13,57 +13,57 @@ const BeneficiarySchema = new mongoose.Schema({
     phone: {
         type: String,
         unique: true
-    }, 
+    },
     email: {
-        type: [String], 
+        type: [String],
         unique: true,
     },
     languages: {
         type: [String],
-    }, 
+    },
     nationality: {
         type: [String],
-    }, 
+    },
     eduLvl: {
         type: [String],
-    }, 
+    },
     bday: {
         type: Date,
         required: true
-    }, 
+    },
     age: {
         type: Number,
         required: true
-    }, 
+    },
     gender: {
         type: String,
         required: true
-    }, 
-    visitReason: { 
+    },
+    visitReason: {
         type: String,
-    }, 
+    },
     joinDate: {
         type: Date,
         required: true
-    }, 
+    },
     attendenceRecord: {
-        type: [{Date,Number}]
-    }, 
+        type: [{ Date, Number }]
+    },
     registrations: {
         type: [Number]
-    }, 
+    },
     interests: {
         type: [String]
-    }, 
+    },
     needs: {
         type: [String]
-    }, 
+    },
     sponsorInfo: {
         type: String
-    }, 
+    },
     referrals: {
         type: [String]
     }
 });
 
-module.exports = Beneficiary = mongoose.model('beneficiary', BeneficiarySchema);
+module.exports = Beneficiary = mongoose.model('beneficiary', BeneficiarySchema, "beneficiaries");
