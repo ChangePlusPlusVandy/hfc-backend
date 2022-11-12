@@ -66,4 +66,4 @@ const BeneficiarySchema = new mongoose.Schema({
     }
 });
 
-module.exports = Beneficiary = mongoose.model('beneficiary', BeneficiarySchema);
+module.exports = Beneficiary = mongoose.model('beneficiary', BeneficiarySchema, 'beneficiaries');
