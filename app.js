@@ -1,16 +1,17 @@
 const express = require('express');
 const connectDB = require('./config/database');
 const app = express();
-const port = 3000;
-require('dotenv').config()
+const PORT = 3000;
 
 
 connectDB();
+
+app.use('/beneficiary',require('./routes/beneficiary'))
 
 app.get('/', (req, res) => {
     res.send('boo! 👻');
 });
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+app.listen(PORT, () => {
+    console.log(`Example app listening on port ${PORT}`);
 });
