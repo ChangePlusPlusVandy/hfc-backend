@@ -5,7 +5,7 @@ const PORT = 3000;
 
 
 connectDB();
-
+app.use(express.json())
 app.use('/beneficiary',require('./routes/beneficiary'))
 
 app.get('/', (req, res) => {
