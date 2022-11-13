@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
 const BeneficiarySchema = new mongoose.Schema({
-    name: {
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
         type: String,
         required: true
     },
@@ -15,7 +19,7 @@ const BeneficiarySchema = new mongoose.Schema({
         unique: true
     }, 
     email: {
-        type: [String], 
+        type: String, 
         unique: true,
     },
     languages: {
