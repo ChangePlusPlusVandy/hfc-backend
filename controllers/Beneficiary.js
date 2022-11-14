@@ -8,8 +8,7 @@ const createBeneficiary = async (req,res) => {
     
     try 
     {
-
-        const {firstName, lastName, id, bday, age, gender, joinDate, email, phone} = req.body;
+        const {firstName, lastName, id, bday, age, gender, joinDate, email, phone} = req.query;
 
         if (!firstName  || !lastName || !id || !bday || !age || !gender || !joinDate) {
             return res.status(400).send({message: "Missing Required Field"});
@@ -31,7 +30,7 @@ const createBeneficiary = async (req,res) => {
         }
         
         
-        let newBeneficiary = new Beneficiary(req.body);
+        let newBeneficiary = new Beneficiary(req.query);
         let beneficiary = await newBeneficiary.save();
         return res.status(200).json(beneficiary);
     } catch (err) {
@@ -42,7 +41,7 @@ const createBeneficiary = async (req,res) => {
 
 const deleteBeneficiary = async (req,res) => {
     try{
-        const beneficiaryID=req.body.beneficiaryID;
+        const beneficiaryID=req.query.beneficiaryID;
         if(beneficiaryID){
             Beneficiary.deleteOne({id: beneficiaryID}).then(function(){
                 return res.status(200).json({message: "Successfully deleted."});
@@ -50,10 +49,32 @@ const deleteBeneficiary = async (req,res) => {
                 return res.status(400).send({message: error});
             });
         }
+        else{
+            return res.status(400).send({message: "Missing Beneficiary ID"});
+        }
     }
     catch (err) {
         console.error(err.message);
         return res.status(500).send({message: err.message});
     }      
 }
-module.exports = {createBeneficiary, deleteBeneficiary};
+const editBeneficiary = async (req, res) =>{
+    try{
+        const beneficiaryID=req.query.beneficiaryID;
+        if(beneficiaryID){
+            const beneficiary = Beneficiary.updateOne({id: beneficiaryID}, req.query).then(function(){                
+            }).catch(function(error){
+                return res.status(400).send({message: error});
+            });
+            return res.status(200).json(beneficiary);
+        }
+        else{
+            return res.status(400).send({message: "Missing Beneficiary ID"});
+        }
+    }
+    catch (err) {
+        console.error(err.message);
+        return res.status(500).send({message: err.message});
+    }      
+}
+module.exports = {createBeneficiary, deleteBeneficiary, editBeneficiary};
