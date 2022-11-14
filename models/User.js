@@ -15,10 +15,13 @@ const UserSchema = new mongoose.Schema({
     },
     joinDate: {
         type: Date,
+        default: () => Date.now(),
+        immutable: true,
         required: true,
     },
     level: {
         type: Number,
+        default: 0,
         required: true,
     }
 });
