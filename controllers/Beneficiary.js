@@ -42,9 +42,23 @@ const createBeneficiary = async (req,res) => {
     } catch (err) {
         console.error(err.message);
         return res.status(500).send({message: err.message});
-    }
-    
+    }   
 }
 
-module.exports = {createBeneficiary};
-
+const deleteBeneficiary = async (req,res) => {
+    try{
+        const beneficiaryID=req.body.beneficiaryID;
+        if(beneficiaryID){
+            Beneficiary.deleteOne({id: beneficiaryID}).then(function(){
+                return res.status(200).json({message: "Successfully deleted."});
+            }).catch(function(error){
+                return res.status(400).send({message: error});
+            });
+        }
+    }
+    catch (err) {
+        console.error(err.message);
+        return res.status(500).send({message: err.message});
+    }      
+}
+module.exports = {createBeneficiary, deleteBeneficiary};
