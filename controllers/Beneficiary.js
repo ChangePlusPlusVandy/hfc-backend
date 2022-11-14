@@ -5,11 +5,10 @@ const Beneficiary = require('../models/Beneficiary');
 
 // Define endpoints below 
 const createBeneficiary = async (req,res) => {
-    
     try 
     {
-        const {firstName, lastName, id, bday, age, gender, joinDate, email, phone} = req.query;
-
+        const {firstName, lastName, id, bday, age, gender, joinDate, email, phone} = req.body;
+        console.log(req.body);
         if (!firstName  || !lastName || !id || !bday || !age || !gender || !joinDate) {
             return res.status(400).send({message: "Missing Required Field"});
         }
@@ -18,6 +17,7 @@ const createBeneficiary = async (req,res) => {
 
         // Don't know if this is necessary bc of unique keyword in model 
         if (phone) {
+            console.log("here")
             let existingUser2 = await Beneficiary.findOne({phone});
         } 
         if (email) {
@@ -30,7 +30,7 @@ const createBeneficiary = async (req,res) => {
         }
         
         
-        let newBeneficiary = new Beneficiary(req.query);
+        let newBeneficiary = new Beneficiary(req.body);
         let beneficiary = await newBeneficiary.save();
         return res.status(200).json(beneficiary);
     } catch (err) {
@@ -41,7 +41,7 @@ const createBeneficiary = async (req,res) => {
 
 const deleteBeneficiary = async (req,res) => {
     try{
-        const beneficiaryID=req.query.beneficiaryID;
+        const beneficiaryID=req.body.beneficiaryID;
         if(beneficiaryID){
             Beneficiary.deleteOne({id: beneficiaryID}).then(function(){
                 return res.status(200).json({message: "Successfully deleted."});
@@ -60,9 +60,9 @@ const deleteBeneficiary = async (req,res) => {
 }
 const editBeneficiary = async (req, res) =>{
     try{
-        const beneficiaryID=req.query.beneficiaryID;
+        const beneficiaryID=req.body.beneficiaryID;
         if(beneficiaryID){
-            const beneficiary = Beneficiary.updateOne({id: beneficiaryID}, req.query).then(function(){                
+            const beneficiary = Beneficiary.updateOne({id: beneficiaryID}, req.body).then(function(){                
             }).catch(function(error){
                 return res.status(400).send({message: error});
             });
