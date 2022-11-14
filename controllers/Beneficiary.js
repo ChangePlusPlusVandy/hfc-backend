@@ -33,12 +33,7 @@ const createBeneficiary = async (req,res) => {
         
         let newBeneficiary = new Beneficiary(req.body);
         let beneficiary = await newBeneficiary.save();
-
-
-        
         return res.status(200).json(beneficiary);
-
-
     } catch (err) {
         console.error(err.message);
         return res.status(500).send({message: err.message});
