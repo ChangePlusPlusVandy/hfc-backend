@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {createBeneficiary, deleteBeneficiary, editBeneficiary} = require('../controllers/Beneficiary.js')
+const {createBeneficiary, deleteBeneficiary, editBeneficiary, getBeneficiary} = require('../controllers/Beneficiary.js')
 
 // Import controller functions above 
 
@@ -8,4 +8,6 @@ const {createBeneficiary, deleteBeneficiary, editBeneficiary} = require('../cont
 router.post('/',createBeneficiary);
 router.delete('/beneficiary', deleteBeneficiary);
 router.put('/beneficiary', editBeneficiary);
+router.get('/beneficiaries', getBeneficiary);
+
 module.exports = router

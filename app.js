@@ -6,11 +6,9 @@ const PORT = 3000;
 
 connectDB();
 app.use(express.json())
-app.use('/beneficiary',require('./routes/beneficiary'))
+app.use('/',require('./routes/beneficiary'))
 
-app.get('/', (req, res) => {
-    res.send('boo! 👻');
-});
+
 
 app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}`);

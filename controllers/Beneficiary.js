@@ -1,14 +1,15 @@
+const e = require('express');
 const express = require('express');
+const { db } = require('../models/Beneficiary');
 const Beneficiary = require('../models/Beneficiary');
-
-
 
 // Define endpoints below 
 const createBeneficiary = async (req,res) => {
+    
     try 
     {
         const {firstName, lastName, id, bday, age, gender, joinDate, email, phone} = req.body;
-        console.log(req.body);
+
         if (!firstName  || !lastName || !id || !bday || !age || !gender || !joinDate) {
             return res.status(400).send({message: "Missing Required Field"});
         }
@@ -17,7 +18,6 @@ const createBeneficiary = async (req,res) => {
 
         // Don't know if this is necessary bc of unique keyword in model 
         if (phone) {
-            console.log("here")
             let existingUser2 = await Beneficiary.findOne({phone});
         } 
         if (email) {
@@ -41,7 +41,7 @@ const createBeneficiary = async (req,res) => {
 
 const deleteBeneficiary = async (req,res) => {
     try{
-        const beneficiaryID=req.body.beneficiaryID;
+        const beneficiaryID=req.query.beneficiaryID;
         if(beneficiaryID){
             Beneficiary.deleteOne({id: beneficiaryID}).then(function(){
                 return res.status(200).json({message: "Successfully deleted."});
@@ -77,4 +77,21 @@ const editBeneficiary = async (req, res) =>{
         return res.status(500).send({message: err.message});
     }      
 }
-module.exports = {createBeneficiary, deleteBeneficiary, editBeneficiary};
+
+const getBeneficiary = async (req, res) => {
+    try {
+        const beneficiary = await Beneficiary.find(req.body);
+        return res.status(200).json(beneficiary);
+    }
+
+    catch(err) {
+        console.error(err.message);
+        return res.status(500).send({message: err.message});
+    }
+}
+
+
+module.exports = {createBeneficiary, deleteBeneficiary, editBeneficiary, getBeneficiary};
+
+
+
