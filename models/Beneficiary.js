@@ -16,11 +16,9 @@ const BeneficiarySchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        unique: true
     }, 
     email: {
         type: String, 
-        unique: true,
     },
     languages: {
         type: [String],
