@@ -1,5 +1,5 @@
 const express = require('express');
-const Beneficiary = require('../models/Beneficiary');
+const Program = require('../models/Programs');
 
 const createProgram = async (req, res) => {
     try {
