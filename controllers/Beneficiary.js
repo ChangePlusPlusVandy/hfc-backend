@@ -1,5 +1,4 @@
 const express = require('express');
-const { db } = require('../models/Beneficiary');
 const Beneficiary = require('../models/Beneficiary');
 
 // Define endpoints below 

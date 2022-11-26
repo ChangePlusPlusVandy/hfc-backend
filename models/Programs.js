@@ -3,7 +3,8 @@ const mongoose = requrie('mongoose');
 const ProgramSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     hosts: {
         type: String,
