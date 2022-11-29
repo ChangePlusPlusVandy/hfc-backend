@@ -4,8 +4,7 @@ const { db } = require('../models/Beneficiary');
 const Beneficiary = require('../models/Beneficiary');
 
 // Define endpoints below 
-const createBeneficiary = async (req,res) => {
-    
+const createBeneficiary = async (req,res) => {    
     try 
     {
         const {firstName, lastName, id, bday, age, gender, joinDate, email, phone} = req.body;
@@ -41,7 +40,7 @@ const createBeneficiary = async (req,res) => {
 
 const deleteBeneficiary = async (req,res) => {
     try{
-        const beneficiaryID=req.query.beneficiaryID;
+        const beneficiaryID=req.body.beneficiaryID;
         if(beneficiaryID){
             Beneficiary.deleteOne({id: beneficiaryID}).then(function(){
                 return res.status(200).json({message: "Successfully deleted."});
@@ -62,7 +61,7 @@ const editBeneficiary = async (req, res) =>{
     try{
         const beneficiaryID=req.body.beneficiaryID;
         if(beneficiaryID){
-            const beneficiary = Beneficiary.updateOne({id: beneficiaryID}, req.body).then(function(){                
+            const beneficiary = await Beneficiary.updateOne({id: beneficiaryID}, req.body).then(function(){                
             }).catch(function(error){
                 return res.status(400).send({message: error});
             });
