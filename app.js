@@ -11,8 +11,8 @@ connectDB();
 app.use(express.json());
 app.use('/user', UserRoutes);
 
-app.get('/', (req, res) => {
-    res.send('booo! 👻');
+app.get("/", (req, res) => {
+    res.send("boo! 👻");
 });
 
 app.listen(port, () => {
