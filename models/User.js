@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
     //They log in with hfc email, so shouldn't we add this as a field????
@@ -34,7 +34,7 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         default: 0,
         //required: true,
-    }
+    },
 });
 
-module.exports = User = mongoose.model('user', UserSchema);
+module.exports = User = mongoose.model("user", UserSchema);
