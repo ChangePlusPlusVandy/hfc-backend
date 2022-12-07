@@ -25,24 +25,11 @@ const CreateAssessment = async (req, res) => {
     }
 }
 
+
 const GetAssessmentById = async (req, res) => {
     try {
         if (req.query.id) {
-            const user = await Assessment.find({ beneficiary: req.query.id }).exec();
-            return res.status(200).json(user);
-        } else {
-            return res.status(500).send("Invalid ID query");
-        }
-    } catch (err) {
-        console.error(err.message);
-        return res.status(500).send({ message: err.message });
-    }
-}
-
-const GetAssessmentByBenificiaryId = async (req, res) => {
-    try {
-        if (req.query.id) {
-            const user = await Assessment.find({ beneficiary: req.query.id }).exec();
+            const user = await Assessment.findById(req.query.id).exec();
             return res.status(200).json(user);
         } else {
             return res.status(500).send("Invalid ID query");
@@ -70,8 +57,9 @@ const DeleteAssessment = async (req, res) => {
 const UpdateAssessment = async (req, res) => {
     try {
         let assessment;
-        if (req.query.id)
-            user = await Assessment.find({ beneficiary: req.query.id }).exec();
+        if (req.query.id) {
+            assessment = await Assessment.findById(req.query.id).exec();
+        }
         else
             return res.status(500).send("Invalid ID query");
 
@@ -87,7 +75,7 @@ const UpdateAssessment = async (req, res) => {
             humanRightsScores } = req.body;
 
         if (beneficiary)
-            assessment.beneficiary.$oid = beneficiary;
+            assessment.beneficiary = mongoose.Types.ObjectId(beneficiary);
         if (dateTaken)
             assessment.dateTaken = dateTaken;
         if (mentalHealthScores)
@@ -114,4 +102,4 @@ const UpdateAssessment = async (req, res) => {
     }
 }
 
-module.exports = { CreateAssessment, GetAssessmentById, GetAssessmentByBenificiaryId, DeleteAssessment, UpdateAssessment };
+module.exports = { CreateAssessment, GetAssessmentById, DeleteAssessment, UpdateAssessment };

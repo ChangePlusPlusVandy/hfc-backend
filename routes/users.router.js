@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-//const { createUser, deleteBeneficiary, editBeneficiary } = require('../controllers/Beneficiary.js')
 const {
     CreateUser,
     GetUserById,
