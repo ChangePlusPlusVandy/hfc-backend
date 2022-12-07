@@ -1,11 +1,12 @@
-const express = require('express');
-const Assessment = require('../models/Assessment.js');
-const mongoose = require('mongoose');
+const express = require("express");
+const Assessment = require("../models/Assessment.js");
+const mongoose = require("mongoose");
 
 const CreateAssessment = async (req, res) => {
     try {
         //For now, beneficiary must be an objectId
-        const { beneficiary,
+        const {
+            beneficiary,
             dateTaken,
             mentalHealthScores,
             financialLitScores,
@@ -13,7 +14,8 @@ const CreateAssessment = async (req, res) => {
             computerSkillScores,
             eduAdvancementScores,
             lifeAdvancementScores,
-            humanRightsScores } = req.body;
+            humanRightsScores,
+        } = req.body;
 
         const newAssessment = await Assessment.create(req.body);
         await newAssessment.save();
@@ -23,8 +25,7 @@ const CreateAssessment = async (req, res) => {
         console.error(err.message);
         return res.status(500).send({ message: err.message });
     }
-}
-
+};
 
 const GetAssessmentById = async (req, res) => {
     try {
@@ -38,12 +39,12 @@ const GetAssessmentById = async (req, res) => {
         console.error(err.message);
         return res.status(500).send({ message: err.message });
     }
-}
+};
 
 const DeleteAssessment = async (req, res) => {
     try {
         if (req.query.id) {
-            await Assessment.deleteOne({ _id: req.query.id })
+            await Assessment.deleteOne({ _id: req.query.id });
             return res.status(200).json({ message: "Successfully deleted." });
         } else {
             return res.status(500).send("Invalid ID query");
@@ -52,19 +53,17 @@ const DeleteAssessment = async (req, res) => {
         console.error(err.message);
         return res.status(500).send({ message: err.message });
     }
-}
+};
 
 const UpdateAssessment = async (req, res) => {
     try {
         let assessment;
         if (req.query.id) {
             assessment = await Assessment.findById(req.query.id).exec();
-        }
-        else
-            return res.status(500).send("Invalid ID query");
+        } else return res.status(500).send("Invalid ID query");
 
-
-        const { beneficiary,
+        const {
+            beneficiary,
             dateTaken,
             mentalHealthScores,
             financialLitScores,
@@ -72,26 +71,24 @@ const UpdateAssessment = async (req, res) => {
             computerSkillScores,
             eduAdvancementScores,
             lifeAdvancementScores,
-            humanRightsScores } = req.body;
+            humanRightsScores,
+        } = req.body;
 
         if (beneficiary)
             assessment.beneficiary = mongoose.Types.ObjectId(beneficiary);
-        if (dateTaken)
-            assessment.dateTaken = dateTaken;
+        if (dateTaken) assessment.dateTaken = dateTaken;
         if (mentalHealthScores)
             assessment.mentalHealthScores = mentalHealthScores;
         if (financialLitScores)
             assessment.financialLitScores = financialLitScores;
-        if (englishScores)
-            assessment.englishScores = englishScores;
+        if (englishScores) assessment.englishScores = englishScores;
         if (computerSkillScores)
             assessment.computerSkillScores = computerSkillScores;
         if (eduAdvancementScores)
             assessment.eduAdvancementScores = eduAdvancementScores;
         if (lifeAdvancementScores)
             assessment.lifeAdvancementScores = lifeAdvancementScores;
-        if (humanRightsScores)
-            assessment.humanRightsScores = humanRightsScores;
+        if (humanRightsScores) assessment.humanRightsScores = humanRightsScores;
 
         await assessment.save();
         console.log(assessment);
@@ -100,6 +97,11 @@ const UpdateAssessment = async (req, res) => {
         console.error(err.message);
         return res.status(500).send({ message: err.message });
     }
-}
+};
 
-module.exports = { CreateAssessment, GetAssessmentById, DeleteAssessment, UpdateAssessment };
+module.exports = {
+    CreateAssessment,
+    GetAssessmentById,
+    DeleteAssessment,
+    UpdateAssessment,
+};
