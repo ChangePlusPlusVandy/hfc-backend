@@ -50,7 +50,7 @@ const updateUser = async (req, res) => {
         else return res.status(500).send("Invalid ID query");
 
         const { username, password, name, level } = req.body;
-        console.log(req.body)
+        console.log(req.body);
 
         if (username) user.username = username;
         if (password) user.password = password;
