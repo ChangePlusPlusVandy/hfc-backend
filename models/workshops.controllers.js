@@ -1,13 +1,10 @@
 const mongoose=require('mongoose')
 const User = require('./User')
 const WorkshopSchema = new mongoose.Schema({
-    workshopID:{
-        type: Number,
-        required: true
-    },
     title: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     hosts: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -32,4 +29,4 @@ const WorkshopSchema = new mongoose.Schema({
 
 })
 
-module.exports = Workshop = mongoose.model('workShop', WorkshopSchema, 'workshop');
+module.exports = Workshop = mongoose.model('workShop', WorkshopSchema);

@@ -1,11 +1,12 @@
 const express = require('express');
 const User = require('../models/User');
-const Workshop=require('../models/Workshop');
+const Workshop=require('../models/workshops.controllers');
 const Beneficiary = require('../models/Beneficiary');
 
 
 const createWorkshop = async(req, res) => {
     try{
+        console.log('here')
         let newWorkshop = new Workshop(req.body);
         let workshop = await newWorkshop.save();
         return res.status(200).json(workshop);
@@ -59,7 +60,8 @@ const editWorkshop = async (req, res) =>{
 
 const getWorkshop = async (req, res) => {
     try {
-        const workshop = await Workshop.find(req.body);
+        const workshop =  await Workshop.find(req.query);
+        console.log(workshop)
         return res.status(200).json(workshop);
     }
 
