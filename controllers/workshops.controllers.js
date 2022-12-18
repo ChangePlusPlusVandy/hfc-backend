@@ -1,7 +1,5 @@
 const express = require('express');
-const User = require('../models/User');
-const Workshop=require('../models/workshops.controllers');
-const Beneficiary = require('../models/Beneficiary');
+const Workshop=require('../models/workshops.models');
 
 
 const createWorkshop = async(req, res) => {
@@ -18,10 +16,11 @@ const createWorkshop = async(req, res) => {
 }
 
 const deleteWorkshop = async (req,res) => {
+    console.log(req.body)
     try{
-        const workID=req.query.workshopID;
+        const workID=req.body.workshopID;
         if(workID){
-            Workshop.deleteOne({workshopID: workID}).then(function(){
+            Workshop.deleteOne({_id: workID}).then(function(){
                 return res.status(200).json({message: "Successfully deleted."});
             }).catch(function(error){
                 return res.status(400).send({message: error});

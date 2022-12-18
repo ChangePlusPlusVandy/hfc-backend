@@ -8,8 +8,7 @@ const PORT = 3000;
 connectDB();
 app.use(express.json())
 app.use(cors())
-app.use('/beneficiary',require('./routes/beneficiary'))
-app.use('/workshop', require('./routes/workshop'))
+app.use('/workshop', require('./routes/workshops.router'))
 
 
 
