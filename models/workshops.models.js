@@ -1,31 +1,34 @@
-const mongoose=require('mongoose')
+const mongoose = require("mongoose");
 const WorkshopSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true,
-        unique: true
+  title: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  hosts: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
     },
-    hosts: [{
-        type: mongoose.Schema.Types.ObjectId,
-        required: true
-    }],
-    description: {
-        type: String,
-        required: true
+  ],
+  description: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    required: true,
+  },
+  numAttendees: {
+    type: Number,
+    required: true,
+  },
+  attendees: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
     },
-    date: {
-        type: Date,
-        required: true
-    },
-    numAttendees:{
-            type: Number,
-            required: true
-    },
-    attendees: [{
-            type: mongoose.Schema.Types.ObjectId,
-            required: true
-    }]
+  ],
+});
 
-})
-
-module.exports = Workshop = mongoose.model('workShop', WorkshopSchema);
+module.exports = Workshop = mongoose.model("workShop", WorkshopSchema);
