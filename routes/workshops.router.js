@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const {
-  createWorkshop,
-  editWorkshop,
-  getWorkshop,
-  deleteWorkshop,
+    createWorkshop,
+    editWorkshop,
+    getWorkshop,
+    deleteWorkshop,
 } = require("../controllers/workshops.controllers");
 
 // Import controller functions above
