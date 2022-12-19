@@ -1,4 +1,3 @@
-const express = require("express");
 const Workshop = require("../models/workshops.models");
 
 const createWorkshop = async (req, res) => {
