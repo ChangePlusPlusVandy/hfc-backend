@@ -48,6 +48,9 @@ const BeneficiarySchema = new mongoose.Schema({
         type: Date,
         required: true
     }, 
+    archived: {
+        type: Boolean,
+    },
     attendenceRecord: {
         type: [{Date,Number}]
     }, 

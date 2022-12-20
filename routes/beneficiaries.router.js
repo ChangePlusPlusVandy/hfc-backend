@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {createBeneficiary, deleteBeneficiary, editBeneficiary, getBeneficiary} = require('../controllers/Beneficiaries.js')
+const {createBeneficiary, deleteBeneficiary, editBeneficiary, getBeneficiary} = require('../controllers/beneficiaries.controllers')
 
 
 
