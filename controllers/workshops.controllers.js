@@ -1,4 +1,4 @@
-const Workshop = require("../models/workshops.models");
+const Workshop = require("../models/Workshop");
 
 const createWorkshop = async (req, res) => {
     try {
