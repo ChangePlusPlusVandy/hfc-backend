@@ -15,7 +15,7 @@ app.use(cors());
 // Routers
 app.use("/workshop", require("./routes/workshops.router"));
 app.use("/users", require("./routes/users.router.js"));
-app.use('/beneficiaries',require('./routes/beneficiaries.router'))
+app.use("/beneficiaries", require("./routes/beneficiaries.router"));
 
 app.get("/", (req, res) => {
     res.send("boo! 👻");
