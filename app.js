@@ -1,15 +1,26 @@
-const express = require('express');
-const connectDB = require('./config/database');
-const app = express();
+const express = require("express");
+const connectDB = require("./config/database");
+const cors = require("cors");
+
 const PORT = 3000;
 
+const app = express();
 
-connectDB();
-app.use(express.json())
-app.use('/beneficiary',require('./routes/beneficiaries.router'))
+connectDB(); // Connect to MongoDB
 
+// Middleware
+app.use(express.json());
+app.use(cors());
 
+// Routers
+app.use("/workshop", require("./routes/workshops.router"));
+app.use("/users", require("./routes/users.router.js"));
+app.use('/beneficiaries',require('./routes/beneficiaries.router'))
+
+app.get("/", (req, res) => {
+    res.send("boo! 👻");
+});
 
 app.listen(PORT, () => {
-    console.log(`Example app listening on port ${PORT}`);
+    console.log(`App listening on port ${PORT}`);
 });
