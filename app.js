@@ -1,21 +1,28 @@
 const express = require("express");
+const cors = require("cors");
+
 const connectDB = require("./config/database");
-const AssessmentRoutes = require("./routes/assessment.router.js");
-const UserRoutes = require("./routes/users.router.js");
+
+const PORT = 3000;
+
 const app = express();
-const port = 3000;
-require("dotenv").config();
 
-connectDB();
+connectDB(); // Connect to MongoDB
 
+// Middleware
 app.use(express.json());
-app.use("/user", UserRoutes);
-app.use("/assessment", AssessmentRoutes);
+app.use(cors());
+
+// Routers
+app.use("/assessment", require("./routes/assessment.router.js"));
+app.use("/workshop", require("./routes/workshops.router"));
+app.use("/users", require("./routes/users.router.js"));
+app.use("/beneficiaries", require("./routes/beneficiaries.router"));
 
 app.get("/", (req, res) => {
     res.send("boo! 👻");
 });
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
 });
