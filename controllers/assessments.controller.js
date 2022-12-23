@@ -1,8 +1,8 @@
-const express = require("express");
-const Assessment = require("../models/Assessment.js");
 const mongoose = require("mongoose");
 
-const CreateAssessment = async (req, res) => {
+const Assessment = require("../models/Assessment.js");
+
+const createAssessment = async (req, res) => {
     try {
         //For now, beneficiary must be an objectId
         const {
@@ -27,7 +27,7 @@ const CreateAssessment = async (req, res) => {
     }
 };
 
-const GetAssessmentById = async (req, res) => {
+const getAssessmentById = async (req, res) => {
     try {
         if (req.query.id) {
             const user = await Assessment.findById(req.query.id).exec();
@@ -41,7 +41,7 @@ const GetAssessmentById = async (req, res) => {
     }
 };
 
-const DeleteAssessment = async (req, res) => {
+const deleteAssessment = async (req, res) => {
     try {
         if (req.query.id) {
             await Assessment.deleteOne({ _id: req.query.id });
@@ -55,7 +55,7 @@ const DeleteAssessment = async (req, res) => {
     }
 };
 
-const UpdateAssessment = async (req, res) => {
+const updateAssessment = async (req, res) => {
     try {
         let assessment;
         if (req.query.id) {
@@ -100,8 +100,8 @@ const UpdateAssessment = async (req, res) => {
 };
 
 module.exports = {
-    CreateAssessment,
-    GetAssessmentById,
-    DeleteAssessment,
-    UpdateAssessment,
+    createAssessment,
+    getAssessmentById,
+    deleteAssessment,
+    updateAssessment,
 };
