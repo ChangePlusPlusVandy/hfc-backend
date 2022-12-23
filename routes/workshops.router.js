@@ -1,13 +1,13 @@
 const express = require("express");
-const router = express.Router();
+
 const {
     createWorkshop,
     editWorkshop,
     getWorkshop,
     deleteWorkshop,
-} = require("../controllers/workshops.controllers");
+} = require("../controllers/workshops.controllers.js");
 
-// Import controller functions above
+const router = express.Router();
 
 // Declare routes below
 router.post("/", createWorkshop);

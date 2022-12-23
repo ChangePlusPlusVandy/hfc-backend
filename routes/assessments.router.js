@@ -1,5 +1,4 @@
 const express = require("express");
-const router = express.Router();
 
 const {
     createAssessment,
@@ -8,6 +7,9 @@ const {
     getAssessmentById,
 } = require("../controllers/assessments.controller.js");
 
+const router = express.Router();
+
+// Declare routes below
 router.post("/", createAssessment);
 router.put("/", updateAssessment);
 router.delete("/", deleteAssessment);

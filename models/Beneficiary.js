@@ -72,7 +72,7 @@ const BeneficiarySchema = new mongoose.Schema({
 });
 
 module.exports = Beneficiary = mongoose.model(
-    "beneficiary",
+    "Beneficiary",
     BeneficiarySchema,
     "beneficiaries"
 );

@@ -1,6 +1,4 @@
-const express = require("express");
-const { db } = require("../models/Beneficiary");
-const Beneficiary = require("../models/Beneficiary");
+const Beneficiary = require("../models/Beneficiary.js");
 
 // Define endpoints below
 const createBeneficiary = async (req, res) => {

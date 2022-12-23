@@ -1,11 +1,13 @@
 const express = require("express");
-const router = express.Router();
+
 const {
     createBeneficiary,
     deleteBeneficiary,
     editBeneficiary,
     getBeneficiary,
-} = require("../controllers/beneficiaries.controllers");
+} = require("../controllers/beneficiaries.controllers.js");
+
+const router = express.Router();
 
 // Declare routes below
 router.post("/", createBeneficiary);

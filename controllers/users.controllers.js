@@ -1,4 +1,5 @@
 const { ObjectId } = require("mongoose").Types;
+
 const User = require("../models/User.js");
 
 const createUser = async (req, res) => {
@@ -70,11 +71,9 @@ const deleteUser = async (req, res) => {
     const userId = req.params?.userId;
     try {
         if (userId)
-            User.deleteOne({ _id: new ObjectId(userId) }).then(function () {
-                return res
-                    .status(200)
-                    .json({ message: "Successfully deleted." });
-            });
+            User.deleteOne({ _id: new ObjectId(userId) }).then(() =>
+                res.status(200).json({ message: "Successfully deleted." })
+            );
         else return res.status(500).send("Invalid ID query");
     } catch (err) {
         console.error(err.message);

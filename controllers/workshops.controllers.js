@@ -1,8 +1,8 @@
-const Workshop = require("../models/Workshop");
+const Workshop = require("../models/Workshop.js");
 
 const createWorkshop = async (req, res) => {
     try {
-        console.log("here");
+        // console.log("here");
         let newWorkshop = new Workshop(req.body);
         let workshop = await newWorkshop.save();
         return res.status(200).json(workshop);
@@ -18,14 +18,10 @@ const deleteWorkshop = async (req, res) => {
         const workID = req.body.workshopID;
         if (workID) {
             Workshop.deleteOne({ _id: workID })
-                .then(function () {
-                    return res
-                        .status(200)
-                        .json({ message: "Successfully deleted." });
-                })
-                .catch(function (error) {
-                    return res.status(400).send({ message: error });
-                });
+                .then(() =>
+                    res.status(200).json({ message: "Successfully deleted." })
+                )
+                .catch((error) => res.status(400).send({ message: error }));
         } else {
             return res.status(400).send({ message: "Missing Workshop ID" });
         }
@@ -37,17 +33,11 @@ const deleteWorkshop = async (req, res) => {
 
 const editWorkshop = async (req, res) => {
     try {
-        const workID = req.body.workshopID;
-        if (workID) {
-            const workshop = Workshop.updateOne(
-                { workshopid: workID },
-                req.body
-            )
-                .then(function () {})
-                .catch(function (error) {
-                    return res.status(400).send({ message: error });
-                });
-            return res.status(200).json(beneficiary);
+        const { workshopID } = req.body;
+        if (workshopID) {
+            const workshop = Workshop.updateOne({ workshopID }, req.body)
+                .then(() => res.status(200).json(beneficiary))
+                .catch((error) => res.status(400).send({ message: error }));
         } else {
             return res.status(400).send({ message: "Missing Beneficiary ID" });
         }

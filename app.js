@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
-const connectDB = require("./config/database");
+const connectDB = require("./config/database.js");
 
 const PORT = 3000;
 
@@ -14,10 +14,10 @@ app.use(express.json());
 app.use(cors());
 
 // Routers
-app.use("/assessment", require("./routes/assessment.router.js"));
-app.use("/workshop", require("./routes/workshops.router"));
+app.use("/assessments", require("./routes/assessments.router.js"));
+app.use("/workshops", require("./routes/workshops.router.js"));
 app.use("/users", require("./routes/users.router.js"));
-app.use("/beneficiaries", require("./routes/beneficiaries.router"));
+app.use("/beneficiaries", require("./routes/beneficiaries.router.js"));
 
 app.get("/", (req, res) => {
     res.send("boo! 👻");
