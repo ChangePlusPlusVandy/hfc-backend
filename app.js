@@ -9,7 +9,7 @@ connectDB();
 app.use(express.json())
 app.use(cors())
 app.use('/beneficiary',require('./routes/beneficiary'))
-app.use('/programs',require('./routes/programs'))
+app.use('/programs',require('./routes/programs.router.js'))
 
 
 
