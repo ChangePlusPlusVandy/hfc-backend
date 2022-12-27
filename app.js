@@ -15,9 +15,10 @@ app.use(cors());
 
 // Routers
 app.use("/assessments", require("./routes/assessments.router.js"));
-app.use("/workshops", require("./routes/workshops.router.js"));
-app.use("/users", require("./routes/users.router.js"));
 app.use("/beneficiaries", require("./routes/beneficiaries.router.js"));
+app.use("/programs", require("./routes/programs.router.js"));
+app.use("/users", require("./routes/users.router.js"));
+app.use("/workshops", require("./routes/workshops.router.js"));
 
 app.get("/", (req, res) => {
     res.send("boo! 👻");
