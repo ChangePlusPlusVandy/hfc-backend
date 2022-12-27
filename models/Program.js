@@ -1,31 +1,31 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const ProgramSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     hosts: {
         type: String,
-        required: true
+        required: true,
     },
     description: {
         type: String,
-        required: true
+        required: true,
     },
     startDate: {
         type: Date,
     },
     endDate: {
-        type: Date
-    }, 
+        type: Date,
+    },
     attendence: {
-        type: [[Date,[Number]]],
+        type: [[Date, [Number]]],
     },
     daysOfWeek: {
-        type: [Number] // 0-6 to denote Monday - Sunday
-    }
-})
+        type: [Number], // 0-6 to denote Monday - Sunday
+    },
+});
 
-module.exports = Program = mongoose.model('program', ProgramSchema);
+module.exports = Program = mongoose.model("program", ProgramSchema);
