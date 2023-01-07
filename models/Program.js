@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema.Types;
 
 const ProgramSchema = new mongoose.Schema({
     title: {
@@ -6,10 +7,12 @@ const ProgramSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    hosts: {
-        type: String,
-        required: true,
-    },
+    hosts: [
+        {
+            type: ObjectId,
+            required: true,
+        },
+    ],
     description: {
         type: String,
         required: true,
@@ -25,6 +28,18 @@ const ProgramSchema = new mongoose.Schema({
     },
     daysOfWeek: {
         type: [Number], // 0-6 to denote Monday - Sunday
+    },
+    dateAdded: {
+        type: Date,
+        required: true,
+    },
+    archived: {
+        type: Boolean,
+        required: true
+    },
+    attendees:{
+        type: [Date,[ObjectId]],
+        required: true
     },
 });
 
