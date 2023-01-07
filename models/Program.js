@@ -35,11 +35,11 @@ const ProgramSchema = new mongoose.Schema({
     },
     archived: {
         type: Boolean,
-        required: true
+        required: true,
     },
-    attendees:{
-        type: [Date,[ObjectId]],
-        required: true
+    attendees: {
+        type: [Date, [ObjectId]],
+        required: true,
     },
 });
 

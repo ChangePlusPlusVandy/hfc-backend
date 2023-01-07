@@ -6,8 +6,8 @@ const createProgram = async (req, res) => {
         if (!title || !hosts || !description) {
             return res.status(400).send({ message: "Missing required field" });
         }
-        req.body.dateAdded=new Date(Date.now())
-        req.body.archived=false;
+        req.body.dateAdded = new Date(Date.now());
+        req.body.archived = false;
         let newProgram = new Program(req.body);
         let program = await newProgram.save();
 
