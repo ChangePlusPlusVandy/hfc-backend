@@ -32,7 +32,7 @@ const deleteBeneficiary = async (req, res) => {
     try {
         const beneficiaryID = req.query.beneficiaryID;
         if (beneficiaryID) {
-            Beneficiary.deleteOne({ id: beneficiaryID })
+            Beneficiary.findByIdAndDelete(beneficiaryID)
                 .then(function () {
                     return res
                         .status(200)
