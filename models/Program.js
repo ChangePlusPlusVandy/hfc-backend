@@ -1,18 +1,24 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
+const { Schema } = mongoose;
 
 const ProgramSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        unique: true,
     },
     hosts: [
         {
             type: ObjectId,
-            required: true,
+            //required: true,
         },
     ],
+
+    // hosts: {
+    //     type: String,
+    //     required: true,
+    //     unique: true,
+    // },
     description: {
         type: String,
         required: true,
@@ -22,9 +28,6 @@ const ProgramSchema = new mongoose.Schema({
     },
     endDate: {
         type: Date,
-    },
-    attendence: {
-        type: [[Date, [Number]]],
     },
     daysOfWeek: {
         type: [Number], // 0-6 to denote Monday - Sunday
@@ -37,10 +40,18 @@ const ProgramSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
     },
-    attendees: {
-        type: [Date, [ObjectId]],
+    attendance: {
+        type: [
+            {
+                date: { type: Date },
+                attendees: [{ type: Schema.Types.ObjectId, ref: 'Attendee' }]
+            }
+        ],
         required: true,
     },
+    roster: [
+        { type: Schema.Types.ObjectId, ref: 'Beneficiary' }
+    ],
 });
 
 module.exports = Program = mongoose.model("program", ProgramSchema);

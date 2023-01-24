@@ -58,7 +58,7 @@ const editBeneficiary = async (req, res) => {
                 { id: beneficiaryID },
                 req.body
             )
-                .then(function () {})
+                .then(function () { })
                 .catch(function (error) {
                     return res.status(400).send({ message: error });
                 });
