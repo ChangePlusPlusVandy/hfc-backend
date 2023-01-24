@@ -32,7 +32,7 @@ const deleteBeneficiary = async (req, res) => {
     try {
         const beneficiaryID = req.query.beneficiaryID;
         if (beneficiaryID) {
-            Beneficiary.deleteOne({ id: beneficiaryID })
+            Beneficiary.findByIdAndDelete(beneficiaryID)
                 .then(function () {
                     return res
                         .status(200)
@@ -54,9 +54,10 @@ const editBeneficiary = async (req, res) => {
     try {
         const beneficiaryID = req.body.beneficiaryID;
         if (beneficiaryID) {
-            const beneficiary = Beneficiary.updateOne(
-                { id: beneficiaryID },
-                req.body
+            const beneficiary = Beneficiary.findByIdAndUpdate(
+                beneficiaryID
+                // { id: beneficiaryID },
+                // req.body
             )
                 .then(function () { })
                 .catch(function (error) {
