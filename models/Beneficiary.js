@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const {Schema} = mongoose;
+const { Schema } = mongoose;
 
 const BeneficiarySchema = new Schema({
     firstName: {
@@ -74,12 +74,15 @@ const BeneficiarySchema = new Schema({
     address: {
         type: String,
     },
-    assessments: [{
-        type: Schema.Types.ObjectId, ref: 'Assessment',
-    }],
+    assessments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Assessment",
+        },
+    ],
     photo: {
-        type: String // change this when we know how to store photos
-    }
+        type: String, // change this when we know how to store photos
+    },
 });
 
 module.exports = Beneficiary = mongoose.model(
