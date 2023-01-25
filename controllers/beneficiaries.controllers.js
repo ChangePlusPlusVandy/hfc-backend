@@ -55,9 +55,8 @@ const editBeneficiary = async (req, res) => {
         const beneficiaryID = req.body.beneficiaryID;
         if (beneficiaryID) {
             const beneficiary = Beneficiary.findByIdAndUpdate(
-                beneficiaryID
-                // { id: beneficiaryID },
-                // req.body
+                beneficiaryID,
+                req.body
             )
                 .then(function () {})
                 .catch(function (error) {
