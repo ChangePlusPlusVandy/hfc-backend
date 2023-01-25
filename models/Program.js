@@ -38,14 +38,12 @@ const ProgramSchema = new mongoose.Schema({
         type: [
             {
                 date: { type: Date },
-                attendees: [{ type: Schema.Types.ObjectId, ref: 'Attendee' }]
-            }
+                attendees: [{ type: Schema.Types.ObjectId, ref: "Attendee" }],
+            },
         ],
         required: true,
     },
-    roster: [
-        { type: Schema.Types.ObjectId, ref: 'Beneficiary' }
-    ],
+    roster: [{ type: Schema.Types.ObjectId, ref: "Beneficiary" }],
 });
 
 module.exports = Program = mongoose.model("program", ProgramSchema);
