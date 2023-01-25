@@ -13,12 +13,6 @@ const ProgramSchema = new mongoose.Schema({
             //required: true,
         },
     ],
-
-    // hosts: {
-    //     type: String,
-    //     required: true,
-    //     unique: true,
-    // },
     description: {
         type: String,
         required: true,
