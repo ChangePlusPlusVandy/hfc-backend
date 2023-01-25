@@ -51,7 +51,6 @@ const deleteBeneficiary = async (req, res) => {
 };
 
 const editBeneficiary = async (req, res) => {
-    // console.log("editBeneficary request body: ", req.body);
     try {
         const beneficiaryID = req.body.beneficiaryID;
         if (beneficiaryID) {
