@@ -1,5 +1,4 @@
 const Program = require("../models/Program.js");
-const Beneficiary = require("../models/Beneficiary.js");
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
 
@@ -14,7 +13,6 @@ const createProgram = async (req, res) => {
         //req.body.archived = false;
         let newProgram = new Program(req.body);
 
-        console.log(newProgram);
         let program = await newProgram.save();
 
         return res.status(200).json(program);
@@ -32,8 +30,9 @@ const getProgram = async (req, res) => {
         if (!req.query.id) programs = await Program.find();
         else
             programs = await Program.find(
-                mongoose.Types.ObjectId(req.query.id)
+                ObjectId(req.query.id)
             ).populate("roster");
+        
         return res.status(200).json(programs);
     } catch (err) {
         console.error(err.message);

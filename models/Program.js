@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const { ObjectId } = mongoose.Schema.Types;
 const { Schema } = mongoose;
+const { ObjectId } = Schema.Types;
 
-const ProgramSchema = new mongoose.Schema({
+const ProgramSchema = new Schema({
     title: {
         type: String,
         required: true,
@@ -10,6 +10,7 @@ const ProgramSchema = new mongoose.Schema({
     hosts: [
         {
             type: ObjectId,
+            ref: "User",
             //required: true,
         },
     ],
@@ -38,12 +39,12 @@ const ProgramSchema = new mongoose.Schema({
         type: [
             {
                 date: { type: Date },
-                attendees: [{ type: Schema.Types.ObjectId, ref: "Attendee" }],
+                attendees: [{ type: ObjectId, ref: "Beneficiary" }],
             },
         ],
         required: true,
     },
-    roster: [{ type: Schema.Types.ObjectId, ref: "Beneficiary" }],
+    roster: [{ type: ObjectId, ref: "Beneficiary" }],
 });
 
 module.exports = Program = mongoose.model("program", ProgramSchema);
