@@ -29,10 +29,10 @@ const getProgram = async (req, res) => {
         let programs;
         if (!req.query.id) programs = await Program.find();
         else
-            programs = await Program.find(
-                ObjectId(req.query.id)
-            ).populate("roster");
-        
+            programs = await Program.find(ObjectId(req.query.id)).populate(
+                "roster"
+            );
+
         return res.status(200).json(programs);
     } catch (err) {
         console.error(err.message);
