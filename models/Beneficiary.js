@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-const BeneficiarySchema = new mongoose.Schema({
+const BeneficiarySchema = new Schema({
     firstName: {
         type: String,
         required: true,
@@ -22,12 +23,13 @@ const BeneficiarySchema = new mongoose.Schema({
     },
     languages: {
         type: [String],
+        required: true,
     },
     nationality: {
         type: [String],
     },
     eduLvl: {
-        type: [String],
+        type: String,
     },
     bday: {
         type: Date,
@@ -47,15 +49,12 @@ const BeneficiarySchema = new mongoose.Schema({
     joinDate: {
         type: Date,
         required: true,
+        default: () => Date.now(),
     },
     archived: {
         type: Boolean,
-    },
-    attendenceRecord: {
-        type: [{ Date, Number }],
-    },
-    registrations: {
-        type: [Number],
+        default: false,
+        required: false,
     },
     interests: {
         type: [String],
@@ -67,7 +66,22 @@ const BeneficiarySchema = new mongoose.Schema({
         type: String,
     },
     referrals: {
-        type: [String],
+        type: String,
+    },
+    staffNotes: {
+        type: String,
+    },
+    address: {
+        type: String,
+    },
+    assessments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Assessment",
+        },
+    ],
+    photo: {
+        type: String, // change this when we know how to store photos
     },
 });
 
