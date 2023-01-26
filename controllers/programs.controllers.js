@@ -1,6 +1,6 @@
 const Program = require("../models/Program.js");
 const mongoose = require("mongoose");
-const { ObjectId } = mongoose.Schema.Types;
+const { ObjectId } = mongoose.Types;
 
 const createProgram = async (req, res) => {
     try {
@@ -60,12 +60,12 @@ const delProgram = async (req, res) => {
 //TODO change to edit by ID
 const editProgram = async (req, res) => {
     try {
-        const programId = mongoose.Types.ObjectId(
+        const programId = ObjectId(
             req.body._id.programID.trim()
         );
         if (req.body.content.roster) {
             req.body.content.roster.forEach((e) =>
-                mongoose.Types.ObjectId(e.trim())
+                ObjectId(e.trim())
             );
         }
         if (programId) {
