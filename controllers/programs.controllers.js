@@ -60,13 +60,9 @@ const delProgram = async (req, res) => {
 //TODO change to edit by ID
 const editProgram = async (req, res) => {
     try {
-        const programId = ObjectId(
-            req.body._id.programID.trim()
-        );
+        const programId = ObjectId(req.body._id.programID.trim());
         if (req.body.content.roster) {
-            req.body.content.roster.forEach((e) =>
-                ObjectId(e.trim())
-            );
+            req.body.content.roster.forEach((e) => ObjectId(e.trim()));
         }
         if (programId) {
             const program = await Program.updateOne(
