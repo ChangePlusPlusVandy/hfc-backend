@@ -5,7 +5,7 @@ const User = require("../models/User.js");
 const createUser = async (req, res) => {
     try {
         //needed in case we need to add validation stuff in the future
-        const { firebaseUID,joinDate, level } = req.body;
+        const { firebaseUID, joinDate, level } = req.body;
 
         const newUser = await User.create(req.body);
         await newUser.save();
