@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
     //They log in with hfc email, so shouldn't we add this as a field????
     firebaseUID: {
-        type: String
+        type: String,
     },
     firstName: {
         type: String,
@@ -25,11 +25,11 @@ const UserSchema = new mongoose.Schema({
         //required: true,
     },
     languages: {
-        type: [String]
+        type: [String],
     },
     phoneNumber: {
-        type: String
-    }
+        type: String,
+    },
 });
 
 module.exports = mongoose.model("User", UserSchema);
