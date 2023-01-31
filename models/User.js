@@ -5,6 +5,14 @@ const UserSchema = new mongoose.Schema({
     firebaseUID: {
         type: String
     },
+    firstName: {
+        type: String,
+        //required: true
+    },
+    lastName: {
+        type: String,
+        //required: true
+    },
     joinDate: {
         type: Date,
         default: () => Date.now(),
