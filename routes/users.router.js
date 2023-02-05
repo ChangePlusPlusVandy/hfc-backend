@@ -6,6 +6,7 @@ const {
     getUsers,
     updateUser,
     deleteUser,
+    getUserByFirebaseId,
 } = require("../controllers/users.controllers.js");
 
 const router = express.Router();
@@ -15,6 +16,7 @@ router.post("/", createUser);
 router.put("/:userId", updateUser);
 router.get("/users", getUsers);
 router.get("/:userId", getUserById);
+router.get("/",getUserByFirebaseId);
 router.delete("/:userId", deleteUser);
 
 module.exports = router;
