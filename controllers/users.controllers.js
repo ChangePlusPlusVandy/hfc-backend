@@ -5,8 +5,8 @@ const User = require("../models/User.js");
 const createUser = async (req, res) => {
     try {
         //needed in case we need to add validation stuff in the future
-        const { firebaseUID,joinDate, level } = req.body;
-        
+        const { firebaseUID, joinDate, level } = req.body;
+
         const newUser = await User.create(req.body);
         await newUser.save();
 
@@ -38,16 +38,15 @@ const getUserByFirebaseId = async (req, res) => {
     console.log(uid);
     try {
         if (uid) {
-            console.log('got here')
-            const user = await User.find({firebaseUID:uid});
-            console.log(user)
+            console.log("got here");
+            const user = await User.find({ firebaseUID: uid });
+            console.log(user);
             return res.status(200).json(user);
         }
     } catch (err) {
         console.error(err.message);
         return res.status(500).send({ message: err.message });
     }
-
 };
 
 const getUsers = async (req, res) => {
@@ -99,4 +98,11 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = { createUser, getUserById, getUserByFirebaseId, getUsers, updateUser, deleteUser };
+module.exports = {
+    createUser,
+    getUserById,
+    getUserByFirebaseId,
+    getUsers,
+    updateUser,
+    deleteUser,
+};

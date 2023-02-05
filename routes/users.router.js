@@ -16,7 +16,7 @@ router.post("/", createUser);
 router.put("/:userId", updateUser);
 router.get("/users", getUsers);
 router.get("/:userId", getUserById);
-router.get("/",getUserByFirebaseId);
+router.get("/", getUserByFirebaseId);
 router.delete("/:userId", deleteUser);
 
 module.exports = router;
