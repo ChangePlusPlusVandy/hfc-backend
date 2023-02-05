@@ -13,9 +13,8 @@ const createWorkshop = async (req, res) => {
 };
 
 const deleteWorkshop = async (req, res) => {
-    console.log(req.body);
     try {
-        const workID = req.body.workshopID;
+        const workID = req.query._id;
         if (workID) {
             Workshop.deleteOne({ _id: workID })
                 .then(() =>
@@ -33,9 +32,12 @@ const deleteWorkshop = async (req, res) => {
 
 const editWorkshop = async (req, res) => {
     try {
-        const { workshopID } = req.body;
+        console.log("editing")
+        const  workshopID  = req.query._id;
         if (workshopID) {
-            const workshop = Workshop.updateOne({ workshopID }, req.body)
+            console.log("editing")
+
+            const workshop = Workshop.updateOne({ _id: workshopID }, req.body )
                 .then(() => res.status(200).json(beneficiary))
                 .catch((error) => res.status(400).send({ message: error }));
         } else {
