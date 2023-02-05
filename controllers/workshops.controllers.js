@@ -32,12 +32,12 @@ const deleteWorkshop = async (req, res) => {
 
 const editWorkshop = async (req, res) => {
     try {
-        console.log("editing")
-        const  workshopID  = req.query._id;
+        console.log("editing");
+        const workshopID = req.query._id;
         if (workshopID) {
-            console.log("editing")
+            console.log("editing");
 
-            const workshop = Workshop.updateOne({ _id: workshopID }, req.body )
+            const workshop = Workshop.updateOne({ _id: workshopID }, req.body)
                 .then(() => res.status(200).json(beneficiary))
                 .catch((error) => res.status(400).send({ message: error }));
         } else {
