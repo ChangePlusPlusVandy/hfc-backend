@@ -25,12 +25,14 @@ const WorkshopSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    attendees: [
-        {
-            type: ObjectId,
-            required: true,
-        },
-    ],
+    numRegistered: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    rating: {
+        type: Number
+    }
 });
 
 module.exports = Workshop = mongoose.model("Workshop", WorkshopSchema);
