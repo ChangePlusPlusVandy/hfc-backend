@@ -1,6 +1,6 @@
 const Workshop = require("../models/Workshop.js");
-const mongoose=require("mongoose")
-const {ObjectId}=mongoose.Types;
+const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Types;
 const createWorkshop = async (req, res) => {
     try {
         // console.log("here");
@@ -34,14 +34,19 @@ const deleteWorkshop = async (req, res) => {
 
 const editWorkshop = async (req, res) => {
     try {
-        const  workshopID  = ObjectId(req.body._id.trim());
-        console.log(workshopID)
-        console.log(req.body)
+        const workshopID = ObjectId(req.body._id.trim());
+        console.log(workshopID);
+        console.log(req.body);
         if (workshopID) {
-            const workshop = Workshop.updateOne({_id: workshopID}, req.body.content)
+            const workshop = Workshop.updateOne(
+                { _id: workshopID },
+                req.body.content
+            )
                 .then((result) => res.status(200).json(result))
-                .catch((error) => {console.log(error)
-                res.status(400).send({ message: error })});
+                .catch((error) => {
+                    console.log(error);
+                    res.status(400).send({ message: error });
+                });
         } else {
             return res.status(404).send({ message: "Missing Workshop ID" });
         }
