@@ -28,7 +28,7 @@ const WorkshopSchema = new mongoose.Schema({
     numRegistered: {
         type: Number,
         required: true,
-        default: 0
+        default: 0,
     },
     rating: {
         type: Number,
