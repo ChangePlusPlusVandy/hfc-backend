@@ -31,7 +31,9 @@ const WorkshopSchema = new mongoose.Schema({
         default: 0
     },
     rating: {
-        type: Number
+        type: Number,
+        required: true,
+        default: 0
     }
 });
 
