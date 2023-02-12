@@ -5,8 +5,8 @@ const {
     deleteBeneficiary,
     editBeneficiary,
     getBeneficiary,
-    archiveBeneficiary, 
-    unarchiveBeneficiary
+    archiveBeneficiary,
+    unarchiveBeneficiary,
 } = require("../controllers/beneficiaries.controllers.js");
 
 const router = express.Router();

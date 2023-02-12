@@ -76,49 +76,59 @@ const editBeneficiary = async (req, res) => {
 const getBeneficiary = async (req, res) => {
     const beneficiaryId = req.query?.id;
     try {
-        const beneficiary = (beneficiaryId) ? await Beneficiary.findById(beneficiaryId).exec() : await Beneficiary.find();
+        const beneficiary = beneficiaryId
+            ? await Beneficiary.findById(beneficiaryId).exec()
+            : await Beneficiary.find();
         return res.status(200).json(beneficiary);
     } catch (err) {
         console.error(err.message);
-        return res.status(500).send({message: err.message})
+        return res.status(500).send({ message: err.message });
     }
-}
+};
 
 const archiveBeneficiary = async (req, res) => {
     const beneficiaryId = req.params?.id;
     console.log(beneficiaryId);
     if (beneficiaryId) {
-        Beneficiary.findByIdAndUpdate(beneficiaryId, {archived: true}, (err, docs) => {
-            if (err) {
-                console.log(err);
-                return res.status(500).send({message: err.message});
-            } else {
-                console.log("Archived Beneficiary : ", docs);
-                return res.status(200).json(docs);
+        Beneficiary.findByIdAndUpdate(
+            beneficiaryId,
+            { archived: true },
+            (err, docs) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).send({ message: err.message });
+                } else {
+                    console.log("Archived Beneficiary : ", docs);
+                    return res.status(200).json(docs);
+                }
             }
-        } );
+        );
     } else {
-        return res.status(400).send({message: "Missing Beneficiary ID"});
+        return res.status(400).send({ message: "Missing Beneficiary ID" });
     }
-}
+};
 
 const unarchiveBeneficiary = async (req, res) => {
     const beneficiaryId = req.params?.id;
     console.log(beneficiaryId);
     if (beneficiaryId) {
-        Beneficiary.findByIdAndUpdate(beneficiaryId, {archived: false}, (err, docs) => {
-            if (err) {
-                console.log(err);
-                return res.status(500).send({message: err.message});
-            } else {
-                console.log("Unarchived Beneficiary: ", docs);
-                return res.status(200).json(docs);
+        Beneficiary.findByIdAndUpdate(
+            beneficiaryId,
+            { archived: false },
+            (err, docs) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).send({ message: err.message });
+                } else {
+                    console.log("Unarchived Beneficiary: ", docs);
+                    return res.status(200).json(docs);
+                }
             }
-        } );
+        );
     } else {
-        return res.status(400).send({message: "Missing Beneficiary ID"});
+        return res.status(400).send({ message: "Missing Beneficiary ID" });
     }
-}
+};
 
 module.exports = {
     createBeneficiary,
@@ -126,5 +136,5 @@ module.exports = {
     editBeneficiary,
     getBeneficiary,
     archiveBeneficiary,
-    unarchiveBeneficiary
+    unarchiveBeneficiary,
 };
