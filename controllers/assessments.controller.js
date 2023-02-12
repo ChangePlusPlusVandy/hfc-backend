@@ -28,13 +28,12 @@ const createAssessment = async (req, res) => {
 };
 
 const getAssessmentById = async (req, res) => {
+    const assessmentID = req.query?.id;
     try {
-        if (req.query.id) {
-            const user = await Assessment.findById(req.query.id).exec();
-            return res.status(200).json(user);
-        } else {
-            return res.status(500).send("Invalid ID query");
-        }
+        const assessment = assessmentID
+            ? await Assessment.findById(assessmentID).exec()
+            : await Assessment.find();
+        return res.status(200).json(assessment);
     } catch (err) {
         console.error(err.message);
         return res.status(500).send({ message: err.message });
