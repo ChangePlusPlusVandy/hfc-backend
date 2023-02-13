@@ -35,12 +35,9 @@ const getUserById = async (req, res) => {
 
 const getUserByFirebaseId = async (req, res) => {
     const uid = req.query?.firebaseUID;
-    console.log(uid);
     try {
         if (uid) {
-            console.log("got here");
             const user = await User.find({ firebaseUID: uid });
-            console.log(user);
             return res.status(200).json(user);
         }
     } catch (err) {
