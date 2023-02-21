@@ -31,7 +31,7 @@ const createBeneficiary = async (req, res) => {
 
 const deleteBeneficiary = async (req, res) => {
     try {
-        const beneficiaryID = req.query.beneficiaryID;
+        const beneficiaryID = req.query.id;
         if (beneficiaryID) {
             Beneficiary.findByIdAndDelete(beneficiaryID)
                 .then(function () {
@@ -53,7 +53,7 @@ const deleteBeneficiary = async (req, res) => {
 
 const editBeneficiary = async (req, res) => {
     try {
-        const beneficiaryID = req.body.beneficiaryID;
+        const beneficiaryID = req.body.id;
         if (beneficiaryID) {
             const beneficiary = Beneficiary.findByIdAndUpdate(
                 beneficiaryID,
@@ -74,7 +74,7 @@ const editBeneficiary = async (req, res) => {
 };
 
 const getBeneficiary = async (req, res) => {
-    const beneficiaryId = req.params?.beneficiaryId;
+    const beneficiaryId = req.query?.id;
     try {
         const beneficiary = beneficiaryId
             ? await Beneficiary.findById(beneficiaryId).exec()
@@ -87,7 +87,7 @@ const getBeneficiary = async (req, res) => {
 };
 
 const archiveBeneficiary = async (req, res) => {
-    const beneficiaryId = req.params?.beneficiaryId;
+    const beneficiaryId = req.params?.id;
     console.log(beneficiaryId);
     if (beneficiaryId) {
         Beneficiary.findByIdAndUpdate(
@@ -109,7 +109,7 @@ const archiveBeneficiary = async (req, res) => {
 };
 
 const unarchiveBeneficiary = async (req, res) => {
-    const beneficiaryId = req.params?.beneficiaryId;
+    const beneficiaryId = req.params?.id;
     console.log(beneficiaryId);
     if (beneficiaryId) {
         Beneficiary.findByIdAndUpdate(
