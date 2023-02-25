@@ -134,6 +134,21 @@ const unarchiveBeneficiary = async (req, res) => {
     }
 };
 
+const updateAssessment = async (req, res) => {
+    const beneficiaryId = req.params?.id;
+    console.log(beneficiaryId);
+    if (req.body?.assessments == undefined) {
+        return res
+            .status(400)
+            .send({ message: "Request Requires Assessment Field" });
+    }
+    if (beneficiaryId) {
+        beneficiary.findByIdAndUpdate(beneficiaryId, {
+            assessments: req.body.assessments,
+        });
+    }
+};
+
 module.exports = {
     createBeneficiary,
     deleteBeneficiary,
@@ -141,4 +156,5 @@ module.exports = {
     getBeneficiary,
     archiveBeneficiary,
     unarchiveBeneficiary,
+    updateAssessment,
 };

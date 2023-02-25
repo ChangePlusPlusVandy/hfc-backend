@@ -7,6 +7,7 @@ const {
     getBeneficiary,
     archiveBeneficiary,
     unarchiveBeneficiary,
+    updateAssessment,
 } = require("../controllers/beneficiaries.controllers.js");
 
 const router = express.Router();
@@ -18,5 +19,6 @@ router.put("/:beneficiaryId", editBeneficiary);
 router.get("/", getBeneficiary);
 router.patch("/archive/:beneficiaryId", archiveBeneficiary);
 router.patch("/unarchive/:beneficiaryId", unarchiveBeneficiary);
+router.patch("/:beneficiaryId/assessment", updateAssessment);
 
 module.exports = router;
