@@ -25,6 +25,12 @@ const AssessmentSchema = new mongoose.Schema({
     vocationAnswers: {
         type: [Number],
     },
+    mentalHealthScore: { type: Number },
+    lifeSkillsScore: { type: Number },
+    socialSkillsScore: { type: Number },
+    educationScore: { type: Number },
+    vocationScore: { type: Number },
+    totalScore: { type: Number },
 });
 
 module.exports = Assessment = mongoose.model("Assessment", AssessmentSchema);
