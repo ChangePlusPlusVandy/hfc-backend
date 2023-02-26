@@ -35,6 +35,10 @@ const WorkshopSchema = new mongoose.Schema({
         required: true,
         default: 0,
     },
+    archived: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 module.exports = Workshop = mongoose.model("Workshop", WorkshopSchema);

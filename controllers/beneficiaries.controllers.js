@@ -74,7 +74,7 @@ const editBeneficiary = async (req, res) => {
 };
 
 const getBeneficiary = async (req, res) => {
-    const beneficiaryId = req.query?.id;
+    const beneficiaryId = req.query.id;
     try {
         const beneficiary = beneficiaryId
             ? await Beneficiary.findById(beneficiaryId).exec()
