@@ -4,6 +4,7 @@ const AssessmentSchema = new mongoose.Schema({
     beneficiary: {
         type: mongoose.ObjectId,
         //required: true
+        // TODO: A reference (not an array)
     },
     dateTaken: {
         type: Date,
