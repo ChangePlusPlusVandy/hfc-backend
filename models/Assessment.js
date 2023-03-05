@@ -10,21 +10,52 @@ const AssessmentSchema = new mongoose.Schema({
         default: () => Date.now(),
         //required: true
     },
-    mentalHealthAnswers: {
-        type: [Number],
+    mentalHealthQs: {
+        type: [
+            {
+                question: { type: String },
+                answer: { type: Number },
+                text: { type: String },
+            },
+        ],
     },
-    lifeSkillsAnswers: {
-        type: [Number],
+    lifeSkillsQs: {
+        type: [
+            {
+                question: { type: String },
+                answer: { type: Number },
+                text: { type: String },
+            },
+        ],
     },
-    socialSkillsAnswers: {
-        type: [Number],
+    socialSkillsQs: {
+        type: [
+            {
+                question: { type: String },
+                answer: { type: Number },
+                text: { type: String },
+            },
+        ],
     },
-    educationAnswers: {
-        type: [Number],
+    educationQs: {
+        type: [
+            {
+                question: { type: String },
+                answer: { type: Number },
+                text: { type: String },
+            },
+        ],
     },
-    vocationAnswers: {
-        type: [Number],
+    vocationQs: {
+        type: [
+            {
+                question: { type: String },
+                answer: { type: Number },
+                text: { type: String },
+            },
+        ],
     },
+
     mentalHealthScore: { type: Number },
     lifeSkillsScore: { type: Number },
     socialSkillsScore: { type: Number },
