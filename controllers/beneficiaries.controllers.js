@@ -19,7 +19,18 @@ const createBeneficiary = async (req, res) => {
             return res.status(400).send({ message: "Missing Required Field" });
         }
 
-        let newBeneficiary = new Beneficiary(req.body);
+        // generate beneficiary ID based on max ID in the database
+        const maxId = await Beneficiary.find()
+            .sort({ id: -1 })
+            .limit(1)
+            .then((docs) => {
+                return docs[0].get("id");
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+        let newBeneficiary = new Beneficiary({ ...req.body, id: maxId + 1 });
         let beneficiary = await newBeneficiary.save();
 
         return res.status(200).json(beneficiary);
