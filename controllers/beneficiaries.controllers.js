@@ -1,21 +1,11 @@
-const { findByIdAndUpdate } = require("../models/Beneficiary.js");
 const Beneficiary = require("../models/Beneficiary.js");
 
 // Define endpoints below
 const createBeneficiary = async (req, res) => {
     try {
-        const { firstName, lastName, id, bday, age, gender, joinDate } =
-            req.body;
+        const { firstName, lastName, bday, age, gender, joinDate } = req.body;
 
-        if (
-            !firstName ||
-            !lastName ||
-            !id ||
-            !bday ||
-            !age ||
-            !gender ||
-            !joinDate
-        ) {
+        if (!firstName || !lastName || !bday || !age || !gender || !joinDate) {
             return res.status(400).send({ message: "Missing Required Field" });
         }
 
