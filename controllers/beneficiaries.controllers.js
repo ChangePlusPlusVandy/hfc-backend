@@ -1,4 +1,3 @@
-const { findByIdAndUpdate } = require("../models/Beneficiary.js");
 const Beneficiary = require("../models/Beneficiary.js");
 
 // Define endpoints below
