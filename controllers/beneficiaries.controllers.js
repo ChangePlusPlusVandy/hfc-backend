@@ -144,7 +144,7 @@ const updateAssessment = async (req, res) => {
             .send({ message: "Request Requires Assessment Field" });
     }
     if (beneficiaryId) {
-        beneficiary.findByIdAndUpdate(beneficiaryId, {
+        Beneficiary.findByIdAndUpdate(beneficiaryId, {
             assessments: req.body.assessments,
         });
     }
