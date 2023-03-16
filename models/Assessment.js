@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
 const AssessmentSchema = new mongoose.Schema({
     beneficiary: {
-        type: mongoose.ObjectId,
-        //required: true
-        // TODO: A reference (careful that it's not an array)
+        type: Schema.Types.ObjectId,
+        ref: "Beneficiary",
+        required: true,
     },
     dateTaken: {
         type: Date,
         default: () => Date.now(),
-        //required: true
     },
     mentalHealthQs: {
         type: [
