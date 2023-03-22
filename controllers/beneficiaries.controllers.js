@@ -32,9 +32,9 @@ const createBeneficiary = async (req, res) => {
 
 const deleteBeneficiary = async (req, res) => {
     try {
-        const beneficiaryID = req.query.id;
-        if (beneficiaryID) {
-            Beneficiary.findByIdAndDelete(beneficiaryID)
+        const beneficiaryId = req.query.id;
+        if (beneficiaryId) {
+            Beneficiary.findByIdAndDelete(beneficiaryId)
                 .then(function () {
                     return res
                         .status(200)
@@ -54,11 +54,11 @@ const deleteBeneficiary = async (req, res) => {
 
 const editBeneficiary = async (req, res) => {
     try {
-        const beneficiaryID = req.params?.beneficiaryId;
+        const beneficiaryId = req.params?.beneficiaryId;
         console.log(req.body);
-        if (beneficiaryID) {
+        if (beneficiaryId) {
             const beneficiary = Beneficiary.findByIdAndUpdate(
-                beneficiaryID,
+                beneficiaryId,
                 req.body
             )
                 .then(function () {
@@ -78,8 +78,28 @@ const editBeneficiary = async (req, res) => {
     }
 };
 
+// const getBeneficiary = async (req, res) => {
+//     const beneficiaryReadable = req.query?.id;
+//     console.log(beneficiaryReadable);
+//     const beneficiary = Beneficiary.find({ id: beneficiaryReadable });
+//     if (beneficiary) {
+//         return res.status(200).json(beneficiary);
+//     }
+
+//     const beneficiaryId = req.query?.id;
+//     try {
+//         beneficiary = beneficiaryId
+//             ? await Beneficiary.findById(beneficiaryId).exec()
+//             : await Beneficiary.find();
+//         return res.status(200).json(beneficiary);
+//     } catch (err) {
+//         console.error(err.message);
+//         return res.status(500).send({ message: err.message });
+//     }
+// };
+
 const getBeneficiary = async (req, res) => {
-    const beneficiaryId = req.query?.id;
+    const beneficiaryId = req.params?.beneficiaryId;
     try {
         const beneficiary = beneficiaryId
             ? await Beneficiary.findById(beneficiaryId).exec()
