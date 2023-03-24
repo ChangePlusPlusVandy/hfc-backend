@@ -1,4 +1,5 @@
 const Workshop = require("../models/Workshop.js");
+const { ObjectId } = mongoose.Types;
 
 const createWorkshop = async (req, res) => {
     try {
@@ -6,6 +7,18 @@ const createWorkshop = async (req, res) => {
         let newWorkshop = new Workshop(req.body);
         let workshop = await newWorkshop.save();
         return res.status(200).json(workshop);
+    } catch (err) {
+        console.error(err.message);
+        return res.status(500).send({ message: err.message });
+    }
+};
+
+const getWorkshopsByBenId = async (req, res) => {
+    try {
+        let workshops = await Workshop.find({
+            attendees: { _id: ObjectId(req.query.id) },
+        });
+        return res.status(200).json(workshops);
     } catch (err) {
         console.error(err.message);
         return res.status(500).send({ message: err.message });
@@ -58,4 +71,10 @@ const getWorkshop = async (req, res) => {
     }
 };
 
-module.exports = { createWorkshop, deleteWorkshop, editWorkshop, getWorkshop };
+module.exports = {
+    createWorkshop,
+    deleteWorkshop,
+    editWorkshop,
+    getWorkshop,
+    getWorkshopsByBenId,
+};
