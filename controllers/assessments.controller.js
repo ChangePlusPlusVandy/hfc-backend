@@ -28,10 +28,10 @@ const createAssessment = async (req, res) => {
 };
 
 const getAssessmentById = async (req, res) => {
-    const assessmentID = req.query?.id;
+    const assessmentId = req.query?.id;
     try {
-        const assessment = assessmentID
-            ? await Assessment.findById(assessmentID).exec()
+        const assessment = assessmentId
+            ? await Assessment.findById(assessmentId).exec()
             : await Assessment.find();
         return res.status(200).json(assessment);
     } catch (err) {
