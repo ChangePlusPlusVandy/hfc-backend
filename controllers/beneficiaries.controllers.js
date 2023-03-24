@@ -99,14 +99,35 @@ const editBeneficiary = async (req, res) => {
 // };
 
 const getBeneficiary = async (req, res) => {
-    const beneficiaryId = req.params?.beneficiaryId;
+    // find by mongo id
+    const mongoId = req.query?.id;
+    if (mongoId) {
+        try {
+            const beneficiary = await Beneficiary.findById(mongoId).exec();
+            return res.status(200).json(beneficiary);
+        } catch (err) {
+            return res.status(500).send({ message: err.message });
+        }
+    }
+    console.log("no mongo id detected");
+
+    // find by readable id
+    const readableId = req.query?.idNum;
+    if (readableId) {
+        try {
+            const beneficiary = await Beneficiary.find({ id: readableId });
+            return res.status(200).json(beneficiary);
+        } catch (err) {
+            return res.status(500).send({ message: err.message });
+        }
+    }
+    console.log("no readable id detected");
+
+    // return all benefiaries
     try {
-        const beneficiary = beneficiaryId
-            ? await Beneficiary.findById(beneficiaryId).exec()
-            : await Beneficiary.find();
+        const beneficiary = await Beneficiary.find();
         return res.status(200).json(beneficiary);
     } catch (err) {
-        console.error(err.message);
         return res.status(500).send({ message: err.message });
     }
 };
