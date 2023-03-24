@@ -9,7 +9,7 @@ const ProgramSchema = new Schema({
     },
     hosts: {
         type: [{ type: ObjectId, ref: "User" }],
-
+        required: true,
         unique: false,
     },
     description: {

@@ -5,15 +5,12 @@ const { ObjectId } = mongoose.Types;
 const createProgram = async (req, res) => {
     try {
 
-        const { title, description } = req.body;
-        if (!title || !description) {
+        const { title, description, hosts } = req.body;
+        if (!title || !description || !hosts) {
             return res.status(400).send({ message: "Missing required field" });
         }
         req.body.dateAdded = new Date(Date.now());
 
-        //req.body.hosts = [ObjectId("63d99c2c5ce74706b54f8611")];
-
-        console.log(req.body.hosts);
         req.body.archived = false;
         let newProgram = new Program(req.body);
 
@@ -26,13 +23,12 @@ const createProgram = async (req, res) => {
     }
 };
 
+
 const getProgramsByBenId = async (req, res) => {
     try {
-        console.log(ObjectId(req.query.id));
         let programs = await Program.find(
-            { "attend": { "_id": ObjectId(req.query.id) } }
+            { "attendees": { "_id": ObjectId(req.query.id) } }
         );
-        console.log(programs);
         return res.status(200).json(programs);
     } catch (err) {
         console.error(err.message);
@@ -81,7 +77,6 @@ const delProgram = async (req, res) => {
     }
 };
 
-//TODO change to edit by ID
 const editProgram = async (req, res) => {
     try {
         const programId = ObjectId(req.body._id.programID.trim());
