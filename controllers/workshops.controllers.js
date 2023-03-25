@@ -1,5 +1,5 @@
 const Workshop = require("../models/Workshop.js");
-const { ObjectId } = mongoose.Types;
+const { ObjectId } = require("mongoose").Types;
 
 const createWorkshop = async (req, res) => {
     try {
