@@ -25,32 +25,32 @@ const ProgramSchema = new Schema({
     schedule: {
         Sunday: {
             startTime: { type: String },
-            endTime: { type: String }
+            endTime: { type: String },
         },
         Monday: {
             startTime: { type: String },
-            endTime: { type: String }
+            endTime: { type: String },
         },
         Tuesday: {
             startTime: { type: String },
-            endTime: { type: String }
+            endTime: { type: String },
         },
         Wednesday: {
             startTime: { type: String },
-            endTime: { type: String }
+            endTime: { type: String },
         },
         Thursday: {
             startTime: { type: String },
-            endTime: { type: String }
+            endTime: { type: String },
         },
         Friday: {
             startTime: { type: String },
-            endTime: { type: String }
+            endTime: { type: String },
         },
         Saturday: {
             startTime: { type: String },
-            endTime: { type: String }
-        }
+            endTime: { type: String },
+        },
     },
     dateAdded: {
         type: Date,

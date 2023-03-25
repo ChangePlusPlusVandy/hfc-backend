@@ -15,15 +15,15 @@ const createWorkshop = async (req, res) => {
 
 const getWorkshopsByBenId = async (req, res) => {
     try {
-        let workshops = await Workshop.find(
-            { "attendees": { "_id": ObjectId(req.query.id) } }
-        );
+        let workshops = await Workshop.find({
+            attendees: { _id: ObjectId(req.query.id) },
+        });
         return res.status(200).json(workshops);
     } catch (err) {
         console.error(err.message);
         return res.status(500).send({ message: err.message });
     }
-}
+};
 
 const deleteWorkshop = async (req, res) => {
     console.log(req.body);
@@ -71,4 +71,10 @@ const getWorkshop = async (req, res) => {
     }
 };
 
-module.exports = { createWorkshop, deleteWorkshop, editWorkshop, getWorkshop, getWorkshopsByBenId };
+module.exports = {
+    createWorkshop,
+    deleteWorkshop,
+    editWorkshop,
+    getWorkshop,
+    getWorkshopsByBenId,
+};

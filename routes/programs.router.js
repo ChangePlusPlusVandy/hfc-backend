@@ -5,7 +5,7 @@ const {
     delProgram,
     editProgram,
     getProgram,
-    getProgramsByBenId
+    getProgramsByBenId,
 } = require("../controllers/programs.controllers.js");
 
 router.post("/", createProgram);

@@ -4,7 +4,6 @@ const { ObjectId } = mongoose.Types;
 
 const createProgram = async (req, res) => {
     try {
-
         const { title, description, hosts } = req.body;
         if (!title || !description || !hosts) {
             return res.status(400).send({ message: "Missing required field" });
@@ -23,36 +22,31 @@ const createProgram = async (req, res) => {
     }
 };
 
-
 const getProgramsByBenId = async (req, res) => {
     try {
-        let programs = await Program.find(
-            { "attendees": { "_id": ObjectId(req.query.id) } }
-        );
+        let programs = await Program.find({
+            attendees: { _id: ObjectId(req.query.id) },
+        });
         return res.status(200).json(programs);
     } catch (err) {
         console.error(err.message);
         return res.status(500).send({ message: err.message });
     }
-}
+};
 
 const getProgram = async (req, res) => {
     try {
-
         // Program.find account for any filters
         // Returns all programs if empty
         let programs;
-        if (!req.query.id) programs = await Program.find().populate(
-            "roster"
-        ).populate(
-            "hosts"
-        );
+        if (!req.query.id)
+            programs = await Program.find()
+                .populate("roster")
+                .populate("hosts");
         else
-            programs = await Program.find(ObjectId(req.query.id)).populate(
-                "roster"
-            ).populate(
-                "hosts"
-            );
+            programs = await Program.find(ObjectId(req.query.id))
+                .populate("roster")
+                .populate("hosts");
         return res.status(200).json(programs);
     } catch (err) {
         console.error(err.message);
@@ -102,4 +96,10 @@ const editProgram = async (req, res) => {
     }
 };
 
-module.exports = { createProgram, editProgram, delProgram, getProgram, getProgramsByBenId };
+module.exports = {
+    createProgram,
+    editProgram,
+    delProgram,
+    getProgram,
+    getProgramsByBenId,
+};
