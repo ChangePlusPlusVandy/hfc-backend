@@ -3,18 +3,9 @@ const Beneficiary = require("../models/Beneficiary.js");
 // Define endpoints below
 const createBeneficiary = async (req, res) => {
     try {
-        const { firstName, lastName, id, bday, age, gender, joinDate } =
-            req.body;
+        const { firstName, lastName, bday, age, gender, joinDate } = req.body;
 
-        if (
-            !firstName ||
-            !lastName ||
-            !id ||
-            !bday ||
-            !age ||
-            !gender ||
-            !joinDate
-        ) {
+        if (!firstName || !lastName || !bday || !age || !gender || !joinDate) {
             return res.status(400).send({ message: "Missing Required Field" });
         }
 
@@ -41,9 +32,9 @@ const createBeneficiary = async (req, res) => {
 
 const deleteBeneficiary = async (req, res) => {
     try {
-        const beneficiaryID = req.query.id;
-        if (beneficiaryID) {
-            Beneficiary.findByIdAndDelete(beneficiaryID)
+        const beneficiaryId = req.query.id;
+        if (beneficiaryId) {
+            Beneficiary.findByIdAndDelete(beneficiaryId)
                 .then(function () {
                     return res
                         .status(200)
@@ -63,11 +54,11 @@ const deleteBeneficiary = async (req, res) => {
 
 const editBeneficiary = async (req, res) => {
     try {
-        const beneficiaryID = req.params?.beneficiaryId;
+        const beneficiaryId = req.params?.beneficiaryId;
         console.log(req.body);
-        if (beneficiaryID) {
+        if (beneficiaryId) {
             const beneficiary = Beneficiary.findByIdAndUpdate(
-                beneficiaryID,
+                beneficiaryId,
                 req.body
             )
                 .then(function () {
@@ -87,15 +78,56 @@ const editBeneficiary = async (req, res) => {
     }
 };
 
+// const getBeneficiary = async (req, res) => {
+//     const beneficiaryReadable = req.query?.id;
+//     console.log(beneficiaryReadable);
+//     const beneficiary = Beneficiary.find({ id: beneficiaryReadable });
+//     if (beneficiary) {
+//         return res.status(200).json(beneficiary);
+//     }
+
+//     const beneficiaryId = req.query?.id;
+//     try {
+//         beneficiary = beneficiaryId
+//             ? await Beneficiary.findById(beneficiaryId).exec()
+//             : await Beneficiary.find();
+//         return res.status(200).json(beneficiary);
+//     } catch (err) {
+//         console.error(err.message);
+//         return res.status(500).send({ message: err.message });
+//     }
+// };
+
 const getBeneficiary = async (req, res) => {
-    const beneficiaryId = req.query?.id;
+    // find by mongo id
+    const mongoId = req.query?.id;
+    if (mongoId) {
+        try {
+            const beneficiary = await Beneficiary.findById(mongoId).exec();
+            return res.status(200).json(beneficiary);
+        } catch (err) {
+            return res.status(500).send({ message: err.message });
+        }
+    }
+    console.log("no mongo id detected");
+
+    // find by readable id
+    const readableId = req.query?.idNum;
+    if (readableId) {
+        try {
+            const beneficiary = await Beneficiary.findOne({ id: readableId });
+            return res.status(200).json(beneficiary);
+        } catch (err) {
+            return res.status(500).send({ message: err.message });
+        }
+    }
+    console.log("no readable id detected");
+
+    // return all benefiaries
     try {
-        const beneficiary = beneficiaryId
-            ? await Beneficiary.findById(beneficiaryId).exec()
-            : await Beneficiary.find();
+        const beneficiary = await Beneficiary.find();
         return res.status(200).json(beneficiary);
     } catch (err) {
-        console.error(err.message);
         return res.status(500).send({ message: err.message });
     }
 };
@@ -145,17 +177,26 @@ const unarchiveBeneficiary = async (req, res) => {
 };
 
 const updateAssessment = async (req, res) => {
-    const beneficiaryId = req.params?.id;
-    console.log(beneficiaryId);
+    const beneficiaryId = req.params?.beneficiaryId;
+    console.log("beneficiaryId: ", beneficiaryId);
     if (req.body?.assessments == undefined) {
         return res
             .status(400)
             .send({ message: "Request Requires Assessment Field" });
     }
+
     if (beneficiaryId) {
-        Beneficiary.findByIdAndUpdate(beneficiaryId, {
-            assessments: req.body.assessments,
-        });
+        console.log("req body: ", req.body.assessments);
+        try {
+            await Beneficiary.findByIdAndUpdate(beneficiaryId, {
+                assessments: req.body.assessments,
+            });
+            return res.status(200).send({ message: "Successfully Updated" });
+        } catch (err) {
+            return res
+                .status(500)
+                .send({ message: "Error Updating Assessments" });
+        }
     }
 };
 
