@@ -11,6 +11,15 @@ const AssessmentSchema = new mongoose.Schema({
         type: Date,
         default: () => Date.now(),
     },
+    educationVocationQs: {
+        type: [
+            {
+                question: { type: String },
+                answer: { type: Number },
+                text: { type: String },
+            },
+        ],
+    },
     mentalHealthQs: {
         type: [
             {
@@ -38,30 +47,11 @@ const AssessmentSchema = new mongoose.Schema({
             },
         ],
     },
-    educationQs: {
-        type: [
-            {
-                question: { type: String },
-                answer: { type: Number },
-                text: { type: String },
-            },
-        ],
-    },
-    vocationQs: {
-        type: [
-            {
-                question: { type: String },
-                answer: { type: Number },
-                text: { type: String },
-            },
-        ],
-    },
 
     mentalHealthScore: { type: Number },
     lifeSkillsScore: { type: Number },
     socialSkillsScore: { type: Number },
-    educationScore: { type: Number },
-    vocationScore: { type: Number },
+    educationVocationScore: { type: Number },
     totalScore: { type: Number },
 });
 
