@@ -4,6 +4,7 @@ const Assessment = require("../models/Assessment.js");
 
 const createAssessment = async (req, res) => {
     try {
+        // TODO: change to new fields
         //For now, beneficiary must be an objectId
         const {
             beneficiary,
