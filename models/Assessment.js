@@ -1,43 +1,58 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
 const AssessmentSchema = new mongoose.Schema({
+    // TODO: change from reference to an object (with populate)
     beneficiary: {
-        type: mongoose.ObjectId,
-        //required: true
+        type: Schema.Types.ObjectId,
+        ref: "Beneficiary",
+        required: true,
     },
     dateTaken: {
         type: Date,
         default: () => Date.now(),
-        //required: true
     },
-    mentalHealthScores: {
-        type: [{ Date, Number }],
-        //required: true
+    educationVocationQs: {
+        type: [
+            {
+                question: { type: String },
+                answer: { type: Number },
+                text: { type: String },
+            },
+        ],
     },
-    financialLitScores: {
-        type: [{ Date, Number }],
-        //required: true
+    mentalHealthQs: {
+        type: [
+            {
+                question: { type: String },
+                answer: { type: Number },
+                text: { type: String },
+            },
+        ],
     },
-    englishScores: {
-        type: [{ Date, Number }],
-        //required: true
+    lifeSkillsQs: {
+        type: [
+            {
+                question: { type: String },
+                answer: { type: Number },
+                text: { type: String },
+            },
+        ],
     },
-    computerSkillScores: {
-        type: [{ Date, Number }],
-        //required: true
+    socialSkillsQs: {
+        type: [
+            {
+                question: { type: String },
+                answer: { type: Number },
+                text: { type: String },
+            },
+        ],
     },
-    eduAdvancementScores: {
-        type: [{ Date, Number }],
-        //required: true
-    },
-    lifeAdvancementScores: {
-        type: [{ Date, Number }],
-        //required: true
-    },
-    humanRightsScores: {
-        type: [{ Date, Number }],
-        //required: true
-    },
+    educationVocationScore: { type: Number },
+    mentalHealthScore: { type: Number },
+    lifeSkillsScore: { type: Number },
+    socialSkillsScore: { type: Number },
+    totalScore: { type: Number },
 });
 
 module.exports = Assessment = mongoose.model("Assessment", AssessmentSchema);
