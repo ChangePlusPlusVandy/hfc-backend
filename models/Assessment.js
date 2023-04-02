@@ -47,11 +47,10 @@ const AssessmentSchema = new mongoose.Schema({
             },
         ],
     },
-
+    educationVocationScore: { type: Number },
     mentalHealthScore: { type: Number },
     lifeSkillsScore: { type: Number },
     socialSkillsScore: { type: Number },
-    educationVocationScore: { type: Number },
     totalScore: { type: Number },
 });
 

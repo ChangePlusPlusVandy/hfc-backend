@@ -57,23 +57,26 @@ const deleteAssessment = async (req, res) => {
 const updateAssessment = async (req, res) => {
     try {
         let assessment;
-        if (req.query.id) {
+        if (req.query?.id) {
             assessment = await Assessment.findById(req.query.id).exec();
         } else return res.status(500).send("Invalid ID query");
 
         // TODO: not sure if some fields are needed?
         const {
             beneficiary,
-            // dateTaken,
-            // mentalHealthScores,
-            // financialLitScores,
-            // englishScores,
-            // computerSkillScores,
-            // eduAdvancementScores,
-            // lifeAdvancementScores,
-            // humanRightsScores,
+            dateTaken,
+            educationVocationQs,
+            mentalHealthQs,
+            lifeSkillsQs,
+            socialSkillsQs,
+            educationVocationScore,
+            mentalHealthScore,
+            lifeSkillsScore,
+            socialSkillsScore,
+            totalScore,
         } = req.body;
 
+        // TODO: finish changing it to new fields
         if (beneficiary)
             assessment.beneficiary = mongoose.Types.ObjectId(beneficiary);
         // if (dateTaken) assessment.dateTaken = dateTaken;
