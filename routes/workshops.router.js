@@ -5,6 +5,7 @@ const {
     editWorkshop,
     getWorkshop,
     deleteWorkshop,
+    getWorkshopsByBenId,
 } = require("../controllers/workshops.controllers.js");
 
 const router = express.Router();
@@ -14,5 +15,6 @@ router.post("/", createWorkshop);
 router.delete("/", deleteWorkshop);
 router.put("/", editWorkshop);
 router.get("/", getWorkshop);
+router.get("/beneficiary", getWorkshopsByBenId);
 
 module.exports = router;

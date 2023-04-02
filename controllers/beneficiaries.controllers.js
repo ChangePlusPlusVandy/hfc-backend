@@ -103,7 +103,9 @@ const getBeneficiary = async (req, res) => {
     const mongoId = req.query?.id;
     if (mongoId) {
         try {
-            const beneficiary = await Beneficiary.findById(mongoId).exec();
+            const beneficiary = await Beneficiary.findById(mongoId)
+                .populate("assessments")
+                .exec();
             return res.status(200).json(beneficiary);
         } catch (err) {
             return res.status(500).send({ message: err.message });

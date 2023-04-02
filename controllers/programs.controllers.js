@@ -25,7 +25,7 @@ const createProgram = async (req, res) => {
 const getProgramsByBenId = async (req, res) => {
     try {
         let programs = await Program.find({
-            attendees: { _id: ObjectId(req.query.id) },
+            roster: { _id: ObjectId(req.query.id) },
         });
         return res.status(200).json(programs);
     } catch (err) {
