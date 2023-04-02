@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Types;
 const createWorkshop = async (req, res) => {
     try {
-        // console.log("here");
         let newWorkshop = new Workshop(req.body);
         let workshop = await newWorkshop.save();
         return res.status(200).json(workshop);
@@ -16,6 +15,7 @@ const createWorkshop = async (req, res) => {
 const deleteWorkshop = async (req, res) => {
     console.log(req.body);
     try {
+        //TODO: use Params
         const workID = req.body.workshopID;
         if (workID) {
             Workshop.deleteOne({ _id: workID })
@@ -34,10 +34,12 @@ const deleteWorkshop = async (req, res) => {
 
 const editWorkshop = async (req, res) => {
     try {
+        //TODO: use Params
         const workshopID = ObjectId(req.body._id.trim());
         console.log(workshopID);
         console.log(req.body);
         if (workshopID) {
+            //TODO: use FindBYIDandUpdate
             const workshop = Workshop.updateOne(
                 { _id: workshopID },
                 req.body.content
