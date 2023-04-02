@@ -117,7 +117,7 @@ const getBeneficiary = async (req, res) => {
     const readableId = req.query?.idNum;
     if (readableId) {
         try {
-            const beneficiary = await Beneficiary.find({ id: readableId });
+            const beneficiary = await Beneficiary.findOne({ id: readableId });
             return res.status(200).json(beneficiary);
         } catch (err) {
             return res.status(500).send({ message: err.message });
@@ -179,17 +179,26 @@ const unarchiveBeneficiary = async (req, res) => {
 };
 
 const updateAssessment = async (req, res) => {
-    const beneficiaryId = req.params?.id;
-    console.log(beneficiaryId);
+    const beneficiaryId = req.params?.beneficiaryId;
+    console.log("beneficiaryId: ", beneficiaryId);
     if (req.body?.assessments == undefined) {
         return res
             .status(400)
             .send({ message: "Request Requires Assessment Field" });
     }
+
     if (beneficiaryId) {
-        Beneficiary.findByIdAndUpdate(beneficiaryId, {
-            assessments: req.body.assessments,
-        });
+        console.log("req body: ", req.body.assessments);
+        try {
+            await Beneficiary.findByIdAndUpdate(beneficiaryId, {
+                assessments: req.body.assessments,
+            });
+            return res.status(200).send({ message: "Successfully Updated" });
+        } catch (err) {
+            return res
+                .status(500)
+                .send({ message: "Error Updating Assessments" });
+        }
     }
 };
 
