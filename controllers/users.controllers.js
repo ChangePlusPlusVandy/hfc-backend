@@ -19,7 +19,7 @@ const createUser = async (req, res) => {
 
 const getUserById = async (req, res) => {
     const userId = req.query?.userId;
-
+    console.log(userId);
     try {
         if (userId) {
             const user = await User.findById(userId).exec();
@@ -47,6 +47,7 @@ const getUserByFirebaseId = async (req, res) => {
 };
 
 const getUsers = async (req, res) => {
+    console.log(req.headers)
     try {
         const allUsers = await User.find({});
         return res.status(200).json(allUsers);
@@ -57,20 +58,27 @@ const getUsers = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-    const userId = req.params?.userId;
+    const userId = req.query?.id;
     try {
-        //Should we be getting ID from body or query???
         let user;
+        console.log(userId);
         if (userId) user = await User.findById(userId).exec();
         else return res.status(500).send("Invalid ID query");
 
-        const { username, password, name, level } = req.body;
+        const { firstName, lastName, password, name, level, joinDate, phoneNumber, archived } = req.body;
         console.log(req.body);
 
-        if (username) user.username = username;
-        if (password) user.password = password;
-        if (name) user.name = name;
-        if (level) user.level = level;
+        if (!!firstName) user.firstName = firstName;
+        if (!!lastName) user.lastName = lastName;
+        if (!!password) user.password = password;
+        if (joinDate != '') {
+            console.log('got here');
+            console.log(new Date(joinDate));
+            user.joinDate = new Date(joinDate);
+        } 
+        if (!!phoneNumber) user.phoneNumber = phoneNumber;
+        if (!!level) user.level = level;
+        user.archived = archived;
 
         await user.save();
         console.log(user);

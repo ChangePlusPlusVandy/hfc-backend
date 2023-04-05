@@ -1,4 +1,6 @@
 const express = require("express");
+const admin = require("../firebase")
+
 
 const {
     createUser,
@@ -11,11 +13,27 @@ const {
 
 const router = express.Router();
 
+
+const createFirebaseUser = (req,res) => {
+    const {email,pass} = req.body;
+    admin.auth().createUser({
+        email: email,
+        password: pass
+    }).then((userRecord) => {
+        console.log("Successfully created user")
+        console.log(userRecord)
+        res.send(userRecord);
+    }).catch((error) => {
+        console.log('Error, error')
+    });
+}
+
 // Declare routes below
 router.post("/", createUser);
-router.put("/:userId", updateUser);
+router.post('/firebase',createFirebaseUser);
+router.put("/", updateUser);
 router.get("/users", getUsers);
-router.get("/:userId", getUserById);
+router.get("/user", getUserById);
 router.get("/", getUserByFirebaseId);
 router.delete("/:userId", deleteUser);
 
