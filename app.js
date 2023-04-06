@@ -2,8 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const connectDB = require("./config/database.js");
-const middleware = require("./middleware");
-
+//const middleware = require("./middleware");
+ 
 const PORT = 3000;
 
 const app = express();
@@ -14,7 +14,8 @@ connectDB(); // Connect to MongoDB
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
-app.use(middleware.decodeToken);
+// TODO: only apply this to enpoints that need admin auth
+//app.use(middleware.decodeToken);
 
 // Routers
 app.use("/assessments", require("./routes/assessments.router.js"));
