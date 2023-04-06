@@ -16,7 +16,6 @@ const UserSchema = new mongoose.Schema({
     joinDate: {
         type: Date,
         default: () => Date.now(),
-        immutable: true,
         //required: true,
     },
     level: {
@@ -29,6 +28,10 @@ const UserSchema = new mongoose.Schema({
     },
     phoneNumber: {
         type: String,
+    },
+    archived: {
+        type: Boolean,
+        default: false,
     },
 });
 
