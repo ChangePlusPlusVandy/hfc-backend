@@ -1,7 +1,5 @@
 const express = require("express");
 
-
-
 const {
     createUser,
     getUserById,
@@ -13,11 +11,9 @@ const {
 
 const router = express.Router();
 
-
-
 // Declare routes below
 router.post("/", createUser);
-router.post('/firebase',createFirebaseUser);
+router.post("/firebase", createFirebaseUser);
 router.put("/", updateUser);
 router.get("/users", getUsers);
 router.get("/user", getUserById);

@@ -30,8 +30,8 @@ const UserSchema = new mongoose.Schema({
         type: String,
     },
     archived: {
-        type: Boolean
-    }
+        type: Boolean,
+    },
 });
 
 module.exports = mongoose.model("User", UserSchema);

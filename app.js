@@ -1,13 +1,12 @@
 const express = require("express");
 const cors = require("cors");
-const helmet = require('helmet')
+const helmet = require("helmet");
 const connectDB = require("./config/database.js");
-const middleware = require('./middlewear');
+const middleware = require("./middlewear");
 
 const PORT = 3000;
 
 const app = express();
-
 
 connectDB(); // Connect to MongoDB
 

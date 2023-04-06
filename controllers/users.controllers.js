@@ -1,5 +1,5 @@
 const { ObjectId } = require("mongoose").Types;
-const admin = require("../firebase")
+const admin = require("../firebase");
 
 const User = require("../models/User.js");
 
@@ -48,7 +48,7 @@ const getUserByFirebaseId = async (req, res) => {
 };
 
 const getUsers = async (req, res) => {
-    console.log(req.headers)
+    console.log(req.headers);
     try {
         const allUsers = await User.find({});
         return res.status(200).json(allUsers);
@@ -66,17 +66,26 @@ const updateUser = async (req, res) => {
         if (userId) user = await User.findById(userId).exec();
         else return res.status(500).send("Invalid ID query");
 
-        const { firstName, lastName, password, name, level, joinDate, phoneNumber, archived } = req.body;
+        const {
+            firstName,
+            lastName,
+            password,
+            name,
+            level,
+            joinDate,
+            phoneNumber,
+            archived,
+        } = req.body;
         console.log(req.body);
 
         if (!!firstName) user.firstName = firstName;
         if (!!lastName) user.lastName = lastName;
         if (!!password) user.password = password;
-        if (joinDate != '') {
-            console.log('got here');
+        if (joinDate != "") {
+            console.log("got here");
             console.log(new Date(joinDate));
             user.joinDate = new Date(joinDate);
-        } 
+        }
         if (!!phoneNumber) user.phoneNumber = phoneNumber;
         if (!!level) user.level = level;
         user.archived = archived;
@@ -104,19 +113,23 @@ const deleteUser = async (req, res) => {
     }
 };
 
-const createFirebaseUser = (req,res) => {
-    const {email,pass} = req.body;
-    admin.auth().createUser({
-        email: email,
-        password: pass
-    }).then((userRecord) => {
-        console.log("Successfully created user")
-        console.log(userRecord)
-        res.send(userRecord);
-    }).catch((error) => {
-        console.log('Error, error')
-    });
-}
+const createFirebaseUser = (req, res) => {
+    const { email, pass } = req.body;
+    admin
+        .auth()
+        .createUser({
+            email: email,
+            password: pass,
+        })
+        .then((userRecord) => {
+            console.log("Successfully created user");
+            console.log(userRecord);
+            res.send(userRecord);
+        })
+        .catch((error) => {
+            console.log("Error, error");
+        });
+};
 
 module.exports = {
     createUser,
