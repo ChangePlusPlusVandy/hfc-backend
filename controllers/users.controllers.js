@@ -58,7 +58,6 @@ const getUsers = async (req, res) => {
     }
 };
 
-
 const updateUser = async (req, res) => {
     // TODO: change to same format as edit beneficiary, keep the destrcuturing of req.body, get rid of unnecessary truthy stuff
     const userId = req.params?.id;
