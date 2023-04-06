@@ -1,4 +1,5 @@
 const { ObjectId } = require("mongoose").Types;
+const admin = require("../firebase")
 
 const User = require("../models/User.js");
 
@@ -103,10 +104,25 @@ const deleteUser = async (req, res) => {
     }
 };
 
+const createFirebaseUser = (req,res) => {
+    const {email,pass} = req.body;
+    admin.auth().createUser({
+        email: email,
+        password: pass
+    }).then((userRecord) => {
+        console.log("Successfully created user")
+        console.log(userRecord)
+        res.send(userRecord);
+    }).catch((error) => {
+        console.log('Error, error')
+    });
+}
+
 module.exports = {
     createUser,
     getUserById,
     getUserByFirebaseId,
+    createFirebaseUser,
     getUsers,
     updateUser,
     deleteUser,
