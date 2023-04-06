@@ -3,7 +3,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const connectDB = require("./config/database.js");
 //const middleware = require("./middleware");
- 
+
 const PORT = 3000;
 
 const app = express();
