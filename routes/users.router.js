@@ -7,6 +7,7 @@ const {
     updateUser,
     deleteUser,
     getUserByFirebaseId,
+    createFirebaseUser,
 } = require("../controllers/users.controllers.js");
 
 const router = express.Router();
