@@ -7,13 +7,11 @@ const ProgramSchema = new Schema({
         type: String,
         required: true,
     },
-    hosts: [
-        {
-            type: ObjectId,
-            ref: "User",
-            //required: true,
-        },
-    ],
+    hosts: {
+        type: [{ type: ObjectId, ref: "User" }],
+        required: true,
+        unique: false,
+    },
     description: {
         type: String,
         required: true,
@@ -24,8 +22,35 @@ const ProgramSchema = new Schema({
     endDate: {
         type: Date,
     },
-    daysOfWeek: {
-        type: [Number], // 0-6 to denote Monday - Sunday
+    schedule: {
+        Sunday: {
+            startTime: { type: String },
+            endTime: { type: String },
+        },
+        Monday: {
+            startTime: { type: String },
+            endTime: { type: String },
+        },
+        Tuesday: {
+            startTime: { type: String },
+            endTime: { type: String },
+        },
+        Wednesday: {
+            startTime: { type: String },
+            endTime: { type: String },
+        },
+        Thursday: {
+            startTime: { type: String },
+            endTime: { type: String },
+        },
+        Friday: {
+            startTime: { type: String },
+            endTime: { type: String },
+        },
+        Saturday: {
+            startTime: { type: String },
+            endTime: { type: String },
+        },
     },
     dateAdded: {
         type: Date,
