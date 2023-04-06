@@ -16,7 +16,7 @@ router.post("/", createUser);
 router.post("/firebase", createFirebaseUser);
 router.put("/", updateUser);
 router.get("/users", getUsers);
-router.get("/user", getUserById);
+router.get("/:userId", getUserById);
 router.get("/", getUserByFirebaseId);
 router.delete("/:userId", deleteUser);
 

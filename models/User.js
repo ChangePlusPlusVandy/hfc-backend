@@ -31,6 +31,7 @@ const UserSchema = new mongoose.Schema({
     },
     archived: {
         type: Boolean,
+        default: false,
     },
 });
 

@@ -1,6 +1,7 @@
 const admin = require("../firebase");
 
 // Decodes the token passed in from the headers in the request and validates it against our firebase store of users
+// See if it works with exporting decodeToken function
 class Middleware {
     async decodeToken(req, res, next) {
         const token = req.headers.authoriztion?.split(" ")[1];

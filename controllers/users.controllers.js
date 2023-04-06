@@ -58,8 +58,10 @@ const getUsers = async (req, res) => {
     }
 };
 
+
 const updateUser = async (req, res) => {
-    const userId = req.query?.id;
+    // TODO: change to same format as edit beneficiary, keep the destrcuturing of req.body, get rid of unnecessary truthy stuff
+    const userId = req.params?.id;
     try {
         let user;
         console.log(userId);
@@ -70,7 +72,6 @@ const updateUser = async (req, res) => {
             firstName,
             lastName,
             password,
-            name,
             level,
             joinDate,
             phoneNumber,
@@ -82,7 +83,6 @@ const updateUser = async (req, res) => {
         if (!!lastName) user.lastName = lastName;
         if (!!password) user.password = password;
         if (joinDate != "") {
-            console.log("got here");
             console.log(new Date(joinDate));
             user.joinDate = new Date(joinDate);
         }
@@ -114,6 +114,7 @@ const deleteUser = async (req, res) => {
 };
 
 const createFirebaseUser = (req, res) => {
+    // TODO: encrypt this bro
     const { email, pass } = req.body;
     admin
         .auth()
