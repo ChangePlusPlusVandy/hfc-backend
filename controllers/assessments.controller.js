@@ -4,18 +4,18 @@ const Assessment = require("../models/Assessment.js");
 
 const createAssessment = async (req, res) => {
     try {
-        // TODO: change to new fields
-        //For now, beneficiary must be an objectId
         const {
             beneficiary,
             dateTaken,
-            mentalHealthScores,
-            financialLitScores,
-            englishScores,
-            computerSkillScores,
-            eduAdvancementScores,
-            lifeAdvancementScores,
-            humanRightsScores,
+            educationVocationQs,
+            mentalHealthQs,
+            lifeSkillsQs,
+            socialSkillsQs,
+            educationVocationScore,
+            mentalHealthScore,
+            lifeSkillsScore,
+            socialSkillsScore,
+            totalScore,
         } = req.body;
 
         const newAssessment = await Assessment.create(req.body);
@@ -32,8 +32,13 @@ const getAssessmentById = async (req, res) => {
     const assessmentId = req.query?.id;
     try {
         const assessment = assessmentId
-            ? await Assessment.findById(assessmentId).exec()
-            : await Assessment.find();
+            ? await Assessment.findById(assessmentId)
+                  .populate({
+                      path: "beneficiary",
+                      select: "firstName lastName id",
+                  })
+                  .exec()
+            : await Assessment.find().populate("beneficiary");
         return res.status(200).json(assessment);
     } catch (err) {
         console.error(err.message);
@@ -62,7 +67,6 @@ const updateAssessment = async (req, res) => {
             assessment = await Assessment.findById(req.query.id).exec();
         } else return res.status(500).send("Invalid ID query");
 
-        // TODO: not sure if some fields are needed?
         const {
             beneficiary,
             dateTaken,
@@ -77,22 +81,20 @@ const updateAssessment = async (req, res) => {
             totalScore,
         } = req.body;
 
-        // TODO: finish changing it to new fields
         if (beneficiary)
             assessment.beneficiary = mongoose.Types.ObjectId(beneficiary);
-        // if (dateTaken) assessment.dateTaken = dateTaken;
-        // if (mentalHealthScores)
-        //     assessment.mentalHealthScores = mentalHealthScores;
-        // if (financialLitScores)
-        //     assessment.financialLitScores = financialLitScores;
-        // if (englishScores) assessment.englishScores = englishScores;
-        // if (computerSkillScores)
-        //     assessment.computerSkillScores = computerSkillScores;
-        // if (eduAdvancementScores)
-        //     assessment.eduAdvancementScores = eduAdvancementScores;
-        // if (lifeAdvancementScores)
-        //     assessment.lifeAdvancementScores = lifeAdvancementScores;
-        // if (humanRightsScores) assessment.humanRightsScores = humanRightsScores;
+        if (dateTaken) assessment.dateTaken = dateTaken;
+        if (educationVocationQs)
+            assessment.educationVocationQs = educationVocationQs;
+        if (mentalHealthQs) assessment.mentalHealthQs = mentalHealthQs;
+        if (lifeSkillsQs) assessment.lifeSkillsQs = lifeSkillsQs;
+        if (socialSkillsQs) assessment.socialSkillsQs = socialSkillsQs;
+        if (educationVocationScore)
+            assessment.educationVocationScore = educationVocationScore;
+        if (mentalHealthScore) assessment.mentalHealthScore = mentalHealthScore;
+        if (lifeSkillsScore) assessment.lifeSkillsScore = lifeSkillsScore;
+        if (socialSkillsScore) assessment.socialSkillsScore = socialSkillsScore;
+        if (totalScore) assessment.totalScore = totalScore;
 
         await assessment.save();
         console.log(assessment);
