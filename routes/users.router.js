@@ -1,5 +1,5 @@
 const express = require("express");
-const VerifyToken = require("../middleware/VerifyToken.js")
+const VerifyToken = require("../middleware/VerifyToken.js");
 
 const {
     createUser,
@@ -9,7 +9,6 @@ const {
     deleteUser,
     createFirebaseUser,
     getUserByFirebaseId,
-    
 } = require("../controllers/users.controllers.js");
 
 const router = express.Router();
