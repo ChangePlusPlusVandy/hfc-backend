@@ -60,7 +60,7 @@ const BeneficiarySchema = new Schema({
         type: [String],
     },
     needs: {
-        type: [String],
+        type: String,
     },
     sponsorInfo: {
         type: String,
