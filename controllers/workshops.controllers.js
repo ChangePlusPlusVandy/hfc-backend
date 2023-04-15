@@ -71,13 +71,18 @@ const editWorkshop = async (req, res) => {
 
 const getWorkshop = async (req, res) => {
     try {
-        const workshop = await Workshop.find(req.query).populate([{
-            path: "attendees",
-            select: "firstName lastName _id"},{
-                path: "hosts",
-                select: "firstName lastName _id"}]
-            )
-        .exec();
+        const workshop = await Workshop.find(req.query)
+            .populate([
+                {
+                    path: "attendees",
+                    select: "firstName lastName _id",
+                },
+                {
+                    path: "hosts",
+                    select: "firstName lastName _id",
+                },
+            ])
+            .exec();
         console.log(workshop);
         return res.status(200).json(workshop);
     } catch (err) {

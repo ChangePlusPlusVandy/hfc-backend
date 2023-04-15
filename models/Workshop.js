@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
-const {Schema}=mongoose;
+const { Schema } = mongoose;
 const WorkshopSchema = new mongoose.Schema({
     title: {
         type: String,
