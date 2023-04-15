@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const verifyAdmin = require("../middleware/verifyAdmin.js")
-const verifyUser = require("../middleware/verifyUser.js")
+const verifyAdmin = require("../middleware/verifyAdmin.js");
+const verifyUser = require("../middleware/verifyUser.js");
 
 const {
     createProgram,
