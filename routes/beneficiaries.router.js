@@ -1,4 +1,6 @@
 const express = require("express");
+const verifyAdmin = require("../middleware/verifyAdmin.js")
+const verifyUser = require("../middleware/verifyUser.js")
 
 const {
     createBeneficiary,
@@ -13,14 +15,14 @@ const {
 const router = express.Router();
 
 // Declare routes below
-router.post("/", createBeneficiary);
-router.delete("/", deleteBeneficiary);
-router.put("/:beneficiaryId", editBeneficiary);
-router.get("/", getBeneficiary); // see maybe not :beneficiaryId
-router.get("/:beneficiaryId", getBeneficiary);
+router.post("/", verifyUser, createBeneficiary);
+router.delete("/",verifyAdmin, deleteBeneficiary);
+router.put("/:beneficiaryId", verifyAdmin, editBeneficiary);
+router.get("/", verifyUser, getBeneficiary); // see maybe not :beneficiaryId
+router.get("/:beneficiaryId", verifyUser, getBeneficiary);
 // router.get("/:id", getBeneficiaryByReadableId);
-router.patch("/archive/:beneficiaryId", archiveBeneficiary);
-router.patch("/unarchive/:beneficiaryId", unarchiveBeneficiary);
-router.patch("/:beneficiaryId/assessment", updateAssessment);
+router.patch("/archive/:beneficiaryId", verifyAdmin, archiveBeneficiary);
+router.patch("/unarchive/:beneficiaryId", verifyAdmin, unarchiveBeneficiary);
+router.patch("/:beneficiaryId/assessment", verifyUser, updateAssessment);
 
 module.exports = router;
