@@ -89,7 +89,7 @@ const updateUser = async (req, res) => {
     try {
         let user;
         if (userId) user = await User.findById(userId).exec();
-        else return res.status(500).send({message: "Invalid ID query"});
+        else return res.status(500).send({ message: "Invalid ID query" });
 
         const {
             firstName,
