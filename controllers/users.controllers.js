@@ -1,4 +1,5 @@
 const { ObjectId } = require("mongoose").Types;
+const admin = require("../firebase");
 
 const User = require("../models/User.js");
 
@@ -19,7 +20,7 @@ const createUser = async (req, res) => {
 
 const getUserById = async (req, res) => {
     const userId = req.query?.userId;
-
+    console.log(userId);
     try {
         if (userId) {
             const user = await User.findById(userId).exec();
@@ -47,6 +48,7 @@ const getUserByFirebaseId = async (req, res) => {
 };
 
 const getUsers = async (req, res) => {
+    console.log(req.headers);
     try {
         const allUsers = await User.find({});
         return res.status(200).json(allUsers);
@@ -57,20 +59,35 @@ const getUsers = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-    const userId = req.params?.userId;
+    // TODO: change to same format as edit beneficiary, keep the destrcuturing of req.body, get rid of unnecessary truthy stuff
+    const userId = req.params?.id;
     try {
-        //Should we be getting ID from body or query???
         let user;
+        console.log(userId);
         if (userId) user = await User.findById(userId).exec();
         else return res.status(500).send("Invalid ID query");
 
-        const { username, password, name, level } = req.body;
+        const {
+            firstName,
+            lastName,
+            password,
+            level,
+            joinDate,
+            phoneNumber,
+            archived,
+        } = req.body;
         console.log(req.body);
 
-        if (username) user.username = username;
-        if (password) user.password = password;
-        if (name) user.name = name;
-        if (level) user.level = level;
+        if (!!firstName) user.firstName = firstName;
+        if (!!lastName) user.lastName = lastName;
+        if (!!password) user.password = password;
+        if (joinDate != "") {
+            console.log(new Date(joinDate));
+            user.joinDate = new Date(joinDate);
+        }
+        if (!!phoneNumber) user.phoneNumber = phoneNumber;
+        if (!!level) user.level = level;
+        user.archived = archived;
 
         await user.save();
         console.log(user);
@@ -95,10 +112,30 @@ const deleteUser = async (req, res) => {
     }
 };
 
+const createFirebaseUser = (req, res) => {
+    // TODO: encrypt this bro
+    const { email, pass } = req.body;
+    admin
+        .auth()
+        .createUser({
+            email: email,
+            password: pass,
+        })
+        .then((userRecord) => {
+            console.log("Successfully created user");
+            console.log(userRecord);
+            res.send(userRecord);
+        })
+        .catch((error) => {
+            console.log("Error, error");
+        });
+};
+
 module.exports = {
     createUser,
     getUserById,
     getUserByFirebaseId,
+    createFirebaseUser,
     getUsers,
     updateUser,
     deleteUser,
