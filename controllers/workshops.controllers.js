@@ -52,8 +52,8 @@ const editWorkshop = async (req, res) => {
         console.log(req.body);
         if (workshopID) {
             //TODO: use FindBYIDandUpdate
-            const workshop = Workshop.updateOne(
-                { _id: workshopID },
+            const workshop = Workshop.findByIdAndUpdate(
+                workshopID,
                 req.body.content
             )
                 .then((result) => res.status(200).json(result))

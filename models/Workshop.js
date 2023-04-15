@@ -25,11 +25,12 @@ const WorkshopSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    numRegistered: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
+    attendees: [
+        {
+            type: ObjectId,
+            required: true,
+        },
+    ],
     rating: {
         type: Number,
         required: true,
