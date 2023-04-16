@@ -1,4 +1,6 @@
 const express = require("express");
+const verifyAdmin = require("../middleware/verifyAdmin.js");
+const verifyUser = require("../middleware/verifyUser.js");
 
 const {
     createWorkshop,
@@ -11,10 +13,10 @@ const {
 const router = express.Router();
 
 // Declare routes below
-router.post("/", createWorkshop);
-router.delete("/", deleteWorkshop);
-router.put("/", editWorkshop);
-router.get("/", getWorkshop);
-router.get("/beneficiary", getWorkshopsByBenId);
+router.post("/", verifyUser, createWorkshop);
+router.delete("/", verifyAdmin, deleteWorkshop);
+router.put("/", verifyAdmin, editWorkshop);
+router.get("/", verifyUser, getWorkshop);
+router.get("/beneficiary", verifyUser, getWorkshopsByBenId);
 
 module.exports = router;

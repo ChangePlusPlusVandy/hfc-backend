@@ -1,5 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const verifyAdmin = require("../middleware/verifyAdmin.js");
+const verifyUser = require("../middleware/verifyUser.js");
+
 const {
     createProgram,
     delProgram,
@@ -8,10 +11,10 @@ const {
     getProgramsByBenId,
 } = require("../controllers/programs.controllers.js");
 
-router.post("/", createProgram);
-router.delete("/", delProgram);
-router.put("/", editProgram);
-router.get("/", getProgram);
-router.get("/beneficiary", getProgramsByBenId);
+router.post("/", verifyUser, createProgram);
+router.delete("/", verifyAdmin, delProgram);
+router.put("/", verifyAdmin, editProgram);
+router.get("/", verifyUser, getProgram);
+router.get("/beneficiary", verifyUser, getProgramsByBenId);
 
 module.exports = router;
