@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const AssessmentSchema = new mongoose.Schema({
-    // TODO: change from reference to an object (with populate)
     beneficiary: {
         type: Schema.Types.ObjectId,
         ref: "Beneficiary",
