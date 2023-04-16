@@ -5,7 +5,7 @@
 const auth = require("../firebase");
 
 const verifyUser = async (req, res, next) => {
-    //console.log('VerifyUser function starting')
+    console.log('VerifyUser function starting')
     try {
         //console.log(req.headers)
         const token = req.headers["authorization"].split(" ")[1];
