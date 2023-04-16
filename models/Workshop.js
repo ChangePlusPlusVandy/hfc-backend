@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
-
+const { Schema } = mongoose;
 const WorkshopSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -9,7 +9,8 @@ const WorkshopSchema = new mongoose.Schema({
     },
     hosts: [
         {
-            type: ObjectId,
+            type: Schema.Types.ObjectId,
+            ref: "User",
             required: true,
         },
     ],
@@ -25,11 +26,13 @@ const WorkshopSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    numRegistered: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
+    attendees: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Beneficiary",
+            required: true,
+        },
+    ],
     rating: {
         type: Number,
         required: true,
