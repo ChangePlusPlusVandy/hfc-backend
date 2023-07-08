@@ -1,6 +1,6 @@
 // const admin = require("firebase-admin");
 // const serviceAccount = require("./ServiceAccount.json");
-// const {getAuth} = require('firebase-admin/auth')
+// const { getAuth } = require('firebase-admin/auth')
 
 // admin.initializeApp({
 //     credential: admin.credential.cert(serviceAccount),
@@ -10,7 +10,7 @@
 // TODO: figure out the difference between above and below
 const { initializeApp, cert } = require("firebase-admin/app");
 const { getAuth } = require("firebase-admin/auth");
-
+//const admin = require("firebase-admin");
 const serviceAccount = require("./ServiceAccount.json");
 
 const app = initializeApp({
