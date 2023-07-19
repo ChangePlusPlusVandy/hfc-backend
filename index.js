@@ -13,6 +13,7 @@ connectDB(); // Connect to MongoDB
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
+// app.use(express.static('public'))
 
 // Routers
 app.use("/assessments", require("./routes/assessments.router.js"));
