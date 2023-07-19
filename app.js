@@ -21,15 +21,15 @@ app.use("/programs", require("./routes/programs.router.js"));
 app.use("/users", require("./routes/users.router.js"));
 app.use("/workshops", require("./routes/workshops.router.js"));
 
-app.get('/', (req, res) => {
-    res.send('boo!');
+app.get("/", (req, res) => {
+    res.send("boo!");
 });
 
 app.listen(PORT, (err, res) => {
     if (err) {
-        console.log(err)
-        return res.status(500).send(err.message)
+        console.log(err);
+        return res.status(500).send(err.message);
     } else {
-        console.log('[INFO] Server Running on port:', PORT)
+        console.log("[INFO] Server Running on port:", PORT);
     }
 });
