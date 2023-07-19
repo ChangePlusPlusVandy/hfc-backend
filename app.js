@@ -3,7 +3,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const connectDB = require("./config/database.js");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.VERCEL_URL || 3000;
 
 const app = express();
 
