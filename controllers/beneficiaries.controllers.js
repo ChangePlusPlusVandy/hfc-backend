@@ -3,9 +3,21 @@ const Beneficiary = require("../models/Beneficiary.js");
 // Define endpoints below
 const createBeneficiary = async (req, res) => {
     try {
+        console.log(
+            "Received request to create beneficiary...",
+            JSON.stringify(req.body, null, 2)
+        );
+
         const { firstName, lastName, bday, age, gender, joinDate } = req.body;
 
-        if (!firstName || !lastName || !bday || !age || !gender || !joinDate) {
+        if (
+            !firstName ||
+            !lastName ||
+            !bday ||
+            age === undefined ||
+            !gender ||
+            !joinDate
+        ) {
             return res.status(400).send({ message: "Missing Required Field" });
         }
 
