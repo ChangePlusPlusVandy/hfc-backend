@@ -1,5 +1,5 @@
 const { ObjectId } = require("mongoose").Types;
-const admin = require("../firebase");
+const auth = require("../firebase");
 
 const User = require("../models/User.js");
 
@@ -7,7 +7,7 @@ const createUser = async (req, res) => {
     try {
         //needed in case we need to add validation stuff in the future
         const { firebaseUID, firstName, lastName, joinDate, level } = req.body;
-
+        console.log("ADDING USER");
         const newUser = await User.create(req.body);
         await newUser.save();
 
@@ -139,19 +139,17 @@ const deleteUser = async (req, res) => {
 const createFirebaseUser = (req, res) => {
     // TODO: encrypt this bro
     const { email, pass } = req.body;
-    admin
-        .auth()
-        .createUser({
-            email: email,
-            password: pass,
-        })
+    auth.createUser({
+        email: email,
+        password: pass,
+    })
         .then((userRecord) => {
             console.log("Successfully created user");
             console.log(userRecord);
             res.send(userRecord);
         })
         .catch((error) => {
-            console.log("Error, error");
+            console.log(error);
         });
 };
 
