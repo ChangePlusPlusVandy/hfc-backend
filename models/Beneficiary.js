@@ -83,10 +83,10 @@ const BeneficiarySchema = new Schema({
     photo: {
         type: String, // change this when we know how to store photos
     },
-    bankAccountIntake: {
+    hasBankAccountIntake: {
         type: Boolean
     },
-    bankAccountCompletion: {
+    hasBankAccountCompletion: {
         type: Boolean
     },
     englishLvlIntake: {
@@ -119,7 +119,7 @@ const BeneficiarySchema = new Schema({
     savingsCompletion: {
         type: Number
     },
-    workFoundCompletion: {
+    hasFoundWorkCompletion: {
         type: Boolean
     },
 });
