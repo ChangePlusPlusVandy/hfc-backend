@@ -83,6 +83,45 @@ const BeneficiarySchema = new Schema({
     photo: {
         type: String, // change this when we know how to store photos
     },
+    hasBankAccountIntake: {
+        type: Boolean,
+    },
+    hasBankAccountCompletion: {
+        type: Boolean,
+    },
+    englishLvlIntake: {
+        type: Number,
+    },
+    englishLvlCompletion: {
+        type: Number,
+    },
+    computerSkillsIntake: {
+        type: Number,
+    },
+    computerSkillsCompletion: {
+        type: Number,
+    },
+    emotionalWellnessIntake: {
+        type: Number,
+    },
+    emotionalWellnessCompletion: {
+        type: Number,
+    },
+    incomeIntake: {
+        type: Number,
+    },
+    incomeCompletion: {
+        type: Number,
+    },
+    savingsIntake: {
+        type: Number,
+    },
+    savingsCompletion: {
+        type: Number,
+    },
+    hasFoundWorkCompletion: {
+        type: Boolean,
+    },
 });
 
 module.exports = Beneficiary = mongoose.model(

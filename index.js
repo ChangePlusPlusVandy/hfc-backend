@@ -3,7 +3,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const connectDB = require("./config/database.js");
 
-const PORT = 3000;
+const PORT = process.env.VERCEL_URL || 3000;
 
 const app = express();
 
@@ -13,6 +13,7 @@ connectDB(); // Connect to MongoDB
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
+// app.use(express.static('public'))
 
 // Routers
 app.use("/assessments", require("./routes/assessments.router.js"));

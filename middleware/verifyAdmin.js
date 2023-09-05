@@ -33,9 +33,10 @@ const verifyAdmin = async (req, res, next) => {
 };
 
 const checkAdminStatus = async (uid, token) => {
+    console.log("checkAdmin function starting");
     try {
         const res = await fetch(
-            `http://localhost:3000/users?firebaseUID=${uid}`,
+            `https://hfc-backend-delta.vercel.app/users?firebaseUID=${uid}`,
             {
                 headers: {
                     "Content-Type": "application/json",
