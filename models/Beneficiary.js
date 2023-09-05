@@ -84,43 +84,43 @@ const BeneficiarySchema = new Schema({
         type: String, // change this when we know how to store photos
     },
     hasBankAccountIntake: {
-        type: Boolean
+        type: Boolean,
     },
     hasBankAccountCompletion: {
-        type: Boolean
+        type: Boolean,
     },
     englishLvlIntake: {
-        type: Number
+        type: Number,
     },
     englishLvlCompletion: {
-        type: Number
+        type: Number,
     },
     computerSkillsIntake: {
-        type: Number
+        type: Number,
     },
     computerSkillsCompletion: {
-        type: Number
+        type: Number,
     },
     emotionalWellnessIntake: {
-        type: Number
+        type: Number,
     },
     emotionalWellnessCompletion: {
-        type: Number
+        type: Number,
     },
     incomeIntake: {
-        type: Number
+        type: Number,
     },
     incomeCompletion: {
-        type: Number
+        type: Number,
     },
     savingsIntake: {
-        type: Number
+        type: Number,
     },
     savingsCompletion: {
-        type: Number
+        type: Number,
     },
     hasFoundWorkCompletion: {
-        type: Boolean
+        type: Boolean,
     },
 });
 

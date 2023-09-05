@@ -9,7 +9,6 @@
 // module.exports = admin;
 // TODO: figure out the difference between above and below
 
-
 const { initializeApp, cert } = require("firebase-admin/app");
 const { getAuth } = require("firebase-admin/auth");
 //const admin = require("firebase-admin");
