@@ -14,7 +14,7 @@ const { getAuth } = require("firebase-admin/auth");
 const serviceAccount = require("./ServiceAccount.json");
 
 const app = initializeApp({
-    credential: cert(serviceAccount),
+    credential: cert(process.env.VERCEL_URI),
 });
 
 const auth = getAuth(app);
